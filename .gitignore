@@ -1,3 +1,5 @@
 config.ru
-./app/db/store/*
+app/db/store/*
+bin/
+.bundle/
 Gemfile.lock
