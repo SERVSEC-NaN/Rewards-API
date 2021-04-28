@@ -4,11 +4,11 @@ source 'https://rubygems.org'
 
 # Web API
 gem 'json'
-gem 'puma', '~>5'
-gem 'roda', '~>3'
+gem 'puma'
+gem 'roda'
 
 # Security
-gem 'rbnacl', '~>7'
+gem 'rbnacl'
 
 # Testing
 gem 'minitest'
