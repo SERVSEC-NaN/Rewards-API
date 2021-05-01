@@ -29,7 +29,7 @@ module Rewards
     def handle_get_id(id, name, model)
       model[id]
     rescue StandardError
-      routing.halt 404, { message: "#{name} Not Found" }
+      routing.halt 404, { message: "#{name} not found" }
     end
 
     def handle_get(model)
@@ -38,25 +38,25 @@ module Rewards
     end
 
     def handle_post(id, name, model)
-      message = "#{name} Stored"
+      message = "#{name} stored"
       unless model.create routing.params
-        message = "Could Not Create #{name}"
+        message = "could not create #{name}"
         routing.halt 400, { message: message }
       end
 
       response.status = 201
-      response['Location'] = "#{@api_root}/#{name}/#{id}"
       { message: message, id: id }
     end
 
     def handle_endpoint(routing, model_name)
-      model_class = Object.const_get model_name
+      name  = model_name.downcase
+      model = Object.const_get model_name
 
-      routing.on "#{model_name.downcase}s" do
+      routing.on "#{name}s" do
         routing.is Integer do |id|
-          routing.get   { handle_get_id id, model_name, model_class }
-          routing.post  { handle_post id, model_name, model_class }
-          routing.get   { handle_get model_class }
+          routing.get   { handle_get_id id, name, model }
+          routing.post  { handle_post id, name, model }
+          routing.get   { handle_get model }
         end
       end
     end
