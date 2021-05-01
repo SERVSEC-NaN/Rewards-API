@@ -10,6 +10,8 @@ module Rewards
     plugin :all_verbs, :halt, :json
     plugin classes: [Array, Hash, Sequel::Model]
 
+    MODELS = %w[Subscriber Subscription Promoter Tag].freeze
+
     @api_root = 'api/v1'
     route do |routing|
       routing.root do
@@ -18,7 +20,7 @@ module Rewards
       end
 
       routing.on @api_root do
-        %w[Subscriber Subscription Promoter Tag].each do |model_route|
+        MODELS.each do |model_route|
           handle_endpoint routing, model_route
         end
       end
