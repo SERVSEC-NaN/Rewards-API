@@ -2,46 +2,63 @@
 
 require 'roda'
 require 'json'
-require_relative '../models/subscribers'
+require_relative '../models/subscriber'
 
 module Rewards
   # Web controller for Rewards api
   class Api < Roda
-    plugin :environments
-    plugin :halt
+    plugin :all_verbs, :halt, :json
+    plugin classes: [Array, Hash, Sequel::Model]
 
-    configure { Account.setup }
-
-    route do |routing| # rubocop:disable Metrics/BlockLength
-      response['Content-Type'] = 'application/json'
-
+    @api_root = 'api/v1'
+    route do |routing|
       routing.root do
         response.status = 200
-        { message: 'Accounts accessible at /api/v1' }.to_json
+        { message: "Rewards API accessible at /#{@api_root}/" }.to_json
       end
 
-      routing.on 'api' do
-        routing.on 'v1' do
-          routing.on 'accounts' do
-            routing.get String do |id|
-              response.status = 200
-              Account.find(id).to_json
-            rescue StandardError
-              routing.halt 404, { message: 'Account Not Found' }.to_json
-            end
+      routing.on @api_root do
+        %w[subscribers subscriptions promoters tags].each do |route_name|
+          handle_endpoint routing, route_name
+        end
+      end
+    end
 
-            routing.get do
-              response.status = 200
-              JSON.pretty_generate({ account_ids: Account.all })
-            end
+    private
 
-            routing.post do
-              doc = Account.new(JSON.parse(routing.body.read))
-              doc.save || routing.halt(400, { message: 'Could Not Store Account' }.to_json)
-              response.status = 201
-              { message: 'Account Stored', id: doc.id }.to_json
-            end
-          end
+    def handle_get_id(id, name, model)
+      model[id]
+    rescue StandardError
+      r.halt 404, { message: "#{name.capitalize} Not Found" }
+    end
+
+    def handle_get(model)
+      response.status = 200
+      model.all
+    end
+
+    def handle_post(id, name, model)
+      message = "#{name.capitalize} Stored"
+      unless model.create JSON.parse(r.params)
+        message = "Could Not Create #{name.capitalize}"
+        r.halt 400, { message: message }
+      end
+
+      response.status = 201
+      response['Location'] = "#{@api_root}/#{name}/#{id}"
+      { message: message, id: id }
+    end
+
+    def handle_endpoint(routing, model_name)
+      model_class = Object.const_get model_name.capitalize
+
+      routing.on "#{model_name}s" do
+        routing.is Integer do |id|
+          routing.get { handle_get_id id, model_name, model_class }
+
+          routing.get { handle_get model_class }
+
+          routing.post  { handle_post id, model_name, model_class }
         end
       end
     end
