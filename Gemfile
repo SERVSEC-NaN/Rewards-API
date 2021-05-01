@@ -2,22 +2,28 @@
 
 source 'https://rubygems.org'
 
+gem 'require_all'
+
 # Web API
 gem 'json'
 gem 'puma'
 gem 'roda'
 
-# Security
-gem 'rbnacl'
+# Database
+gem 'hirb'
+gem 'sequel'
+group :development, :test do
+  gem 'sqlite3'
+end
 
 # Testing
-gem 'minitest'
-gem 'minitest-rg'
-gem 'rack-test'
+group :test do
+  gem 'minitest'
+  gem 'minitest-rg'
+  gem 'rack-test'
+end
 
-# Debugging
+# Development
 gem 'pry'
 gem 'rerun'
-
-# Static
 gem 'rubocop'
