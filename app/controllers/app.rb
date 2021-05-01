@@ -29,7 +29,7 @@ module Rewards
     def handle_get_id(id, name, model)
       model[id]
     rescue StandardError
-      r.halt 404, { message: "#{name} Not Found" }
+      routing.halt 404, { message: "#{name} Not Found" }
     end
 
     def handle_get(model)
@@ -54,9 +54,9 @@ module Rewards
 
       routing.on "#{model_name.downcase}s" do
         routing.is Integer do |id|
-          routing.get { handle_get_id id, model_name, model_class }
-          routing.get { handle_get model_class }
+          routing.get   { handle_get_id id, model_name, model_class }
           routing.post  { handle_post id, model_name, model_class }
+          routing.get   { handle_get model_class }
         end
       end
     end
