@@ -1,4 +1,4 @@
-require 'require_all'
-require_all 'app/**/*.rb'
+require_relative './require_app'
+require_app
 
 run Rewards::Api.freeze.app

@@ -2,12 +2,16 @@
 
 source 'https://rubygems.org'
 
-gem 'require_all'
-
 # Web API
 gem 'json'
 gem 'puma'
 gem 'roda'
+
+# Configuration
+gem 'figaro'
+gem 'rake'
+gem 'rbnacl'
+gem 'require_all'
 
 # Database
 gem 'hirb'
@@ -22,6 +26,9 @@ group :test do
   gem 'minitest-rg'
   gem 'rack-test'
 end
+
+# Security
+gem 'bundler-audit'
 
 # Development
 gem 'pry'
