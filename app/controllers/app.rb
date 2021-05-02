@@ -7,19 +7,19 @@ require_relative '../models/subscriber'
 module Rewards
   # Web controller for Rewards api
   class Api < Roda
-    plugin :all_verbs, :halt, :json
-    plugin classes: [Array, Hash, Sequel::Model]
+    plugin :all_verbs
+    plugin :halt
+    plugin :json
 
     MODELS = %w[Subscriber Subscription Promoter Tag].freeze
 
-    @api_root = 'api/v1'
+    api_root = 'api/v1'
     route do |routing|
       routing.root do
-        response.status = 200
-        { message: "Rewards API accessible at /#{@api_root}/" }
+        { message: "Rewards API accessible at /#{api_root}/" }
       end
 
-      routing.on @api_root do
+      routing.on "#{api_root}" do
         MODELS.each do |model_route|
           handle_endpoint routing, model_route
         end
@@ -28,37 +28,32 @@ module Rewards
 
     private
 
-    def handle_get_id(id, name, model)
-      model[id]
-    rescue StandardError
-      routing.halt 404, { message: "#{name} not found" }
-    end
+    def handle_get(model, id = nil)
+      return model[id] || raise("#{model.to_s.downcase} not found") if id
 
-    def handle_get(model)
       response.status = 200
       model.all
+    rescue StandardError => e
+      routing.halt 404, { message: e.message }
     end
 
-    def handle_post(id, name, model)
-      message = "#{name} stored"
-      unless model.create routing.params
-        message = "could not create #{name}"
-        routing.halt 400, { message: message }
-      end
-
+    def handle_post(id, model)
+      name = model.to_s.downcase
+      model.create routing.params || raise("could not create #{name}")
       response.status = 201
-      { message: message, id: id }
+      { message: "#{name} stored", id: id }
+    rescue StandardError => e
+      routing.halt 400, { message: e.message }
     end
 
     def handle_endpoint(routing, model_name)
-      name  = model_name.downcase
       model = Object.const_get model_name
 
-      routing.on "#{name}s" do
+      routing.on "#{model_name.downcase}s" do
         routing.is Integer do |id|
-          routing.get   { handle_get_id id, name, model }
-          routing.post  { handle_post id, name, model }
           routing.get   { handle_get model }
+          routing.get   { handle_get id, model }
+          routing.post  { handle_post id, model }
         end
       end
     end
