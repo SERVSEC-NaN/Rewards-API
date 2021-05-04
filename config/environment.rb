@@ -21,7 +21,6 @@ module Rewards
     def self.logger = Logger.new($stderr)
 
     DB = Sequel.connect(config.DATABASE_URL)
-    #DB = Sequel.amalgalite
     def self.DB = DB # rubocop:disable Naming/MethodName
 
     configure :development, :test do
