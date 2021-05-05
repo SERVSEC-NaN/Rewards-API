@@ -25,7 +25,7 @@ task style: %i[spec audit] do
   sh 'rubocop .'
 end
 
-desc 'Update vulnerabilities lit and audit gems'
+desc 'Start server'
 task :server do
   sh 'bundle exec rackup'
 end
