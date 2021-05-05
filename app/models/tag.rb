@@ -5,7 +5,7 @@ require 'sequel'
 
 module Rewards
   # Models a tag
-  class Subscription < Sequel::Model
+  class Tag < Sequel::Model
     many_to_many :subscriptions
 
     plugin :json_serializer

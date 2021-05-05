@@ -26,6 +26,11 @@ task style: %i[spec audit] do
 end
 
 desc 'Update vulnerabilities lit and audit gems'
+task :server do
+  sh 'bundle exec rackup'
+end
+
+desc 'Update vulnerabilities lit and audit gems'
 task :audit do
   sh 'bundle audit check --update'
 end

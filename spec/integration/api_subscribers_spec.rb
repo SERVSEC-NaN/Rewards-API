@@ -16,7 +16,7 @@ describe 'Test Subscriber Handling' do
       Rewards::Subscriber.create(phone: '1123456')
       Rewards::Subscriber.create(phone: '1234561')
 
-      get "#{@api_root}"
+      get @api_root
       _(last_response.status).must_equal 200
 
       result = JSON.parse last_response.body
