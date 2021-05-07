@@ -20,6 +20,7 @@ module Rewards
       routing.on API_ROOT do
         MODELS.each do |model_name|
           @model_name = model_name
+          @model_route = "#{API_ROOT}/#{@model_name}s"
           @model = Object.const_get "Rewards::#{model_name.capitalize}"
           routing.on "#{model_name}s" do
             routing.get do
@@ -54,6 +55,7 @@ module Rewards
       entry = @model.create JSON.parse(route.body.read)
       route.halt 400, "Could not save #{@model_name}" unless entry
       response.status = 201
+      response['Location'] = "#{@model_route}/#{entry.id}"
       { message: "#{@model_name} stored" }
     rescue StandardError; route.halt 500, { message: 'Database error' }
     end
