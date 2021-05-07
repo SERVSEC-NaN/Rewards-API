@@ -1,4 +1,4 @@
-app/db/store/*
+app/db/store/*.db
 bin/
 .bundle/
 Gemfile.lock
