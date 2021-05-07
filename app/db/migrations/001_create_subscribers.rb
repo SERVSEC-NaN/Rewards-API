@@ -5,7 +5,7 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:subscribers) do
-      primary_key :id
+      uuid :id, primary_key: true
 
       String :phone, unique: true
     end

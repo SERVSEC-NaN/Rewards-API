@@ -9,6 +9,7 @@ module Rewards
     one_to_many :subscribers
     many_to_many :tags
 
+    plugin :uuid, field: :id
     plugin :json_serializer
     plugin :validation_helpers
 

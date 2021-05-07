@@ -8,6 +8,7 @@ module Rewards
   class Subscriber < Sequel::Model
     one_to_many :subscriptions
 
+    plugin :uuid, field: :id
     plugin :json_serializer
     plugin :validation_helpers
 

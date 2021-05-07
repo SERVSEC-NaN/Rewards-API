@@ -5,7 +5,7 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:promoters) do
-      primary_key :id
+      uuid :id, primary_key: true
       foreign_key :subscription_id, table: :subscriptions
 
       String :name
