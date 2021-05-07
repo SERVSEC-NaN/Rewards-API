@@ -23,7 +23,7 @@ module Rewards
           @model = Object.const_get "Rewards::#{model_name.capitalize}"
           routing.on "#{model_name}s" do
             routing.get do
-              routing.is Integer do |model_id|
+              routing.is String do |model_id|
                 handle_get routing, model_id
               end
               handle_get routing
