@@ -52,8 +52,8 @@ module Rewards
     end
 
     def handle_post(route)
-      entry = @model.create JSON.parse(route.body.read)
-      route.halt 400, "Could not save #{@model_name}" unless entry
+      entry = @model.new JSON.parse(route.body.read)
+      route.halt 400, "Could not save #{@model_name}" unless entry.save
       response.status = 201
       response['Location'] = "#{@model_route}/#{entry.id}"
       { message: "#{@model_name} stored" }
