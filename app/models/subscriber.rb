@@ -6,7 +6,8 @@ require 'sequel'
 module Rewards
   # Models a subscriber
   class Subscriber < Sequel::Model
-    one_to_many :subscriptions
+    many_to_many :subscriptions, left_key: :subscription_id, right_key: :subscriber_id,
+                                 join_table: :subscriptions_subscribers
 
     plugin :uuid, field: :id
     plugin :json_serializer

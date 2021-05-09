@@ -6,7 +6,8 @@ require 'sequel'
 module Rewards
   # Models a tag
   class Tag < Sequel::Model
-    many_to_many :subscriptions
+    many_to_many :subscriptions, left_key: :tag_id, right_key: :subscription_id,
+                                 join_table: :subscriptions_tags
 
     plugin :uuid, field: :id
     plugin :json_serializer
