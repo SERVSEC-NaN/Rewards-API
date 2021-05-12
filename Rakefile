@@ -7,7 +7,7 @@ task default: :spec
 desc 'Test all the specs'
 task :spec do
   Rake::TestTask.new(:spec) do |t|
-    t.pattern = 'spec/*_spec.rb'
+    t.pattern = 'spec/**/*_spec.rb'
     t.warning = false
   end
 end
@@ -36,7 +36,7 @@ task :audit do
 end
 
 desc 'Checks for release'
-task release?: %i[spec style audit] do
+task release: %i[spec style audit] do
   puts "\nReady for release!"
 end
 
@@ -59,7 +59,7 @@ namespace :db do
   desc 'Run migrations'
   task migrate: :print_env do
     puts 'Migrating database to latest'
-    Sequel::Migrator.run(app.DB, 'app/db/migrations')
+    Sequel::Migrator.run app.DB, 'app/db/migrations'
   end
 
   desc 'Delete database'
@@ -71,13 +71,9 @@ namespace :db do
 
   desc 'Delete dev or test database file'
   task :drop do
-    if app.environment == :production
-      puts 'Cannot wipe production database!'
-      return
-    end
-
+    (p 'Cannot wipe production database!' && return) if app.environment == :production
     db_filename = "app/db/store/#{Rewards::Api.environment}.db"
-    FileUtils.rm(db_filename)
+    FileUtils.rm db_filename
     puts "Deleted #{db_filename}"
   end
 

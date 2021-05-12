@@ -17,6 +17,12 @@ gem 'require_all'
 gem 'hirb'
 gem 'sequel'
 group :development, :test do
+  gem 'pry'
+  gem 'rerun'
+  gem 'rubocop'
+  gem 'rubocop-minitest'
+  gem 'rubocop-rake'
+  gem 'rubocop-sequel'
   gem 'sqlite3'
 end
 
@@ -29,8 +35,3 @@ end
 
 # Security
 gem 'bundler-audit'
-
-# Development
-gem 'pry'
-gem 'rerun'
-gem 'rubocop'

@@ -1,8 +1,0 @@
----
-# ignore block length where unavoidable (e.g., framework requires it)
-Metrics/BlockLength:
-  Enabled: true
-  Exclude:
-    - app/controllers/*.rb # Roda's nested controllers require large blocks
-    - spec/**/*.rb # Minitest's nested test structure requires large blocks
-    - Rakefile # Rake namespaces produce large blocks
