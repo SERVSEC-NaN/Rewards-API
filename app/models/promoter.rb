@@ -6,7 +6,8 @@ require 'sequel'
 module Rewards
   # Models a promoter
   class Promoter < Sequel::Model
-    one_to_many  :subscriptions
+    one_to_many :subscriptions, left_key: :promoter_id, right_key: :subscription_id,
+                                join_table: :subscriptions_promoters
 
     plugin :uuid, field: :id
     plugin :json_serializer

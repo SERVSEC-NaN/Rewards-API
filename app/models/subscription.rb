@@ -6,7 +6,8 @@ require 'sequel'
 module Rewards
   # Models a subscription
   class Subscription < Sequel::Model
-    many_to_one :promoter
+    many_to_one :promoters, left_key: :subscription_id, right_key: :promoter_id,
+                            join_table: :subscriptions_promoters
 
     many_to_many :subscribers, left_key: :subscriber_id, right_key: :subscription_id,
                                join_table: :subscriptions_subscribers
