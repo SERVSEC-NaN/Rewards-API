@@ -1,6 +1,6 @@
 <h1 align="center">Service Security Class</h1>
 
-- [] User accounts: let's create/update accounts for users Implement
+- [ ] User accounts: let's create/update accounts for users Implement
 salted, hashed (with key-stretching) passwords.
 
 Create a KeyStretching module Create a Password model Write
@@ -18,14 +18,14 @@ collaborators vs. collaborations) Use association_dependencies to
 maintain table integrity (use destroy or nullify to specify how to
 cascade resource destruction).
 
-- [] Use service objects to cleanup controllers and reuse functionality
+- [ ] Use service objects to cleanup controllers and reuse functionality
 
 Create service objects wherever you find you have to write chained
 methods multiple lines to create or change resources Reuse your
 service objects in controllers, tests, and code for seeding the
 database.
 
-- [] Implement a database seeding task (optional)
+- [ ] Implement a database seeding task (optional)
 
 Use the sequel-seed gem to create a `rake db:seed` task for your API Put
 your seeding code in `seeds/<date>_<description>.rb` files (example,
@@ -45,13 +45,13 @@ Write a controller route (and tests) to get an account
 
 ## Week 10: Database Hardening
 
--[x] Prevent mass assignment vulnerabilities by restricting columns Add
+- [x] Prevent mass assignment vulnerabilities by restricting columns Add
 a whitelist of permissible methods to restrict which attributes of
 your models can be changed by a mass assignment from user input Add
 tests to ensure that mass assignment does not work (returns 400 Bad
 Request).
 
--[x] Prevent Basic SQL injection attacks Use string literalization
+- [x] Prevent Basic SQL injection attacks Use string literalization
 and/or query parameterization Add tests that validate that SQL
 injection does not work on routes with sensitive data.
 
@@ -61,12 +61,12 @@ migrations and models for those tables to use UUIDs instead Use a uuid
 type in your migrations Use the :uuid plugin in Sequel models to
 autogenerate UUIDs.
 
-- [] Encrypt any sensitive columns that should not be read if your
+- [ ] Encrypt any sensitive columns that should not be read if your
 database is stolen Discuss as a team which columns of which tables
 contain the most sensitive data Create a SecureDB library class to
 encrypt/decrypt sensitive methods.
 
-- [] Create a database key for your development and test environments
+- [ ] Create a database key for your development and test environments
 only for now Encrypt!
 
 Don't forget to put your config/secrets.yml file in .gitignore.
@@ -75,7 +75,7 @@ Change the name of encrypted columns (with a prefix/suffix like
 secure_ or _secure) Create reader and writer methods in your models to
 encrypt/decrypt columns on demand.
 
-- [] Add Info/Warning/Error Logs Log warnings for mass assignment
+- [ ] Add Info/Warning/Error Logs Log warnings for mass assignment
 attempts (display keys involved but do not log actual data!)  Log
 errors for any unknown errors (typically 500 server errors) BONUS:
 Notice that we cannot search through secured (encrypted) fields in our
@@ -103,7 +103,7 @@ fields that we can use for searching.
 - [x] Follow the plural/singular conventions of database tables and
   foreign keys.
 
-### - [x] 2. Playing with Models!
+### 2. Playing with Models!
 
 ### 3. Update your routes and test them!
 
