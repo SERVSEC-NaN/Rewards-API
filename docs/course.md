@@ -1,5 +1,7 @@
 <h1 align="center">Service Security Class</h1>
 
+## Week 11: User Accounts.
+
 - [ ] User accounts: let's create/update accounts for users Implement
 salted, hashed (with key-stretching) passwords.
 
