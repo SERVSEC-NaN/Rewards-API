@@ -1,7 +1,7 @@
 <h1 align="center">Service Security Class</h1>
 
-1. User accounts: let's create/update accounts for users Implement
-salted, hashed (with key-stretching) passwords. []
+- [] User accounts: let's create/update accounts for users Implement
+salted, hashed (with key-stretching) passwords.
 
 Create a KeyStretching module Create a Password model Write
 appropriate unit tests for your handling passwords Create a migration
@@ -9,7 +9,7 @@ and model (call it Account) for user accounts Make sure your
 migrations add a hashed password field Give your Account model methods
 to set and check (not get!) passwords.
 
-2. Many-to-Many Associations [x]
+- [x] Many-to-Many Associations
 
 Add any many-to-many relationships you need using join tables Affected
 models should define many-to-many relationships in in both directions
@@ -18,14 +18,14 @@ collaborators vs. collaborations) Use association_dependencies to
 maintain table integrity (use destroy or nullify to specify how to
 cascade resource destruction).
 
-3. Use service objects to cleanup controllers and reuse functionality []
+- [] Use service objects to cleanup controllers and reuse functionality
 
 Create service objects wherever you find you have to write chained
 methods multiple lines to create or change resources Reuse your
 service objects in controllers, tests, and code for seeding the
 database.
 
-4. Implement a database seeding task (optional) []
+- [] Implement a database seeding task (optional)
 
 Use the sequel-seed gem to create a `rake db:seed` task for your API Put
 your seeding code in `seeds/<date>_<description>.rb` files (example,
@@ -45,121 +45,124 @@ Write a controller route (and tests) to get an account
 
 ## Week 10: Database Hardening
 
-1. Prevent mass assignment vulnerabilities by restricting columns Add
+-[x] Prevent mass assignment vulnerabilities by restricting columns Add
 a whitelist of permissible methods to restrict which attributes of
 your models can be changed by a mass assignment from user input Add
 tests to ensure that mass assignment does not work (returns 400 Bad
-Request). [x]
+Request).
 
-2. Prevent Basic SQL injection attacks Use string literalization
+-[x] Prevent Basic SQL injection attacks Use string literalization
 and/or query parameterization Add tests that validate that SQL
-injection does not work on routes with sensitive data. [x]
+injection does not work on routes with sensitive data.
 
-3. UUIDs (optional) Discuss as a team if there are any primary keys
+- [x] UUIDs (optional) Discuss as a team if there are any primary keys
 that you are not comfortable displaying on route URL Modify the
 migrations and models for those tables to use UUIDs instead Use a uuid
 type in your migrations Use the :uuid plugin in Sequel models to
-autogenerate UUIDs. [x]
+autogenerate UUIDs.
 
-4. Encrypt any sensitive columns that should not be read if your
+- [] Encrypt any sensitive columns that should not be read if your
 database is stolen Discuss as a team which columns of which tables
 contain the most sensitive data Create a SecureDB library class to
-encrypt/decrypt sensitive methods. []
+encrypt/decrypt sensitive methods.
 
-⚠ Don't forget to put your config/secrets.yml file in .gitignore
-Create a database key for your development and test environments only
-for now Encrypt!  Change the name of encrypted columns (with a
-prefix/suffix like secure_ or _secure) Create reader and writer
-methods in your models to encrypt/decrypt columns on demand. []
+- [] Create a database key for your development and test environments
+only for now Encrypt!
 
-5. Add Info/Warning/Error Logs Log warnings for mass assignment
+Don't forget to put your config/secrets.yml file in .gitignore.
+
+Change the name of encrypted columns (with a prefix/suffix like
+secure_ or _secure) Create reader and writer methods in your models to
+encrypt/decrypt columns on demand.
+
+- [] Add Info/Warning/Error Logs Log warnings for mass assignment
 attempts (display keys involved but do not log actual data!)  Log
 errors for any unknown errors (typically 500 server errors) BONUS:
 Notice that we cannot search through secured (encrypted) fields in our
 database using Sequel. Consider creating a digest field for secured
-fields that we can use for searching. []
+fields that we can use for searching.
 
 ##  Week 9: Databases and ORM
 
 ### 1. Write migrations to create relational tables for your project:
 
-- Identify two model entities you need for your project, define
-  corresponding database tables. [x]
+- [x] Identify two model entities you need for your project, define
+  corresponding database tables.
 
-- Add gems to Gemfile and create config/environments.rb. [x]
+- [x] Add gems to Gemfile and create config/environments.rb.
 
-- Create migration files in app/db/migrations/ that define how to
-  create your tables. [x]
+- [x] Create migration files in app/db/migrations/ that define how to
+  create your tables.
 
-- Create a Rakefile with a db:migrate and other database related
-  tasks. [x]
+- [x] Create a Rakefile with a db:migrate and other database related
+  tasks.
 
-- Run migrations to create development.db and test.db Sqlite databases
-  for the two environments. [x]
+- [x] Run migrations to create development.db and test.db Sqlite databases
+  for the two environments.
 
-- Follow the plural/singular conventions of database tables and
-  foreign keys. [x]
+- [x] Follow the plural/singular conventions of database tables and
+  foreign keys.
 
-### 2. Playing with Models! [x]
+### - [x] 2. Playing with Models!
 
 ### 3. Update your routes and test them!
 
-- Test the root route of your Web API to make sure it returns a valid
-  message. [x]
+- [x] Test the root route of your Web API to make sure it returns a valid
+  message.
 
 - Test each GET and POST route you create:
 
-    + Add a before block to your tests that deletes your tables before
-      each test! [x]
+    - [x] Add a before block to your tests that deletes your tables before
+      each test!
 
-    + Write a HAPPY path that tests a successful case for each
-      route. [x]
+    - [x] Write a HAPPY path that tests a successful case for each
+      route.
 
-    + Write at least one SAD path that tests a fail case for each
-      route. [x]
+    - [x] Write at least one SAD path that tests a fail case for each
+      route.
 
-    + Be able to GET a list of all resource of that type. [x]
+    - [x] Be able to GET a list of all resource of that type.
 
-    + Be able to GET a single resource of that type. [x]
+    - [x] Be able to GET a single resource of that type.
 
-    + Be able to POST to create a single resource of that type. [x]
+    - [x] Be able to POST to create a single resource of that type.
 
 
 ##  Week 8: HTTP and Web APIs
 
 ### 1. Create a basic domain resource entity class
 
-- The #initialize method should create a new object [x]
+- [x] The #initialize method should create a new object
 
-- #new_id method to create unique IDs for new objects [x]
+- [x] #new_id method to create unique IDs for new objects
 
-- #to_json method to represent a resource object as json [x]
+- [x] #to_json method to represent a resource object as json
 
-- #save method to save a new entity [x]
+- [x] #save method to save a new entity
 
-- ::find method to find a specific entity by id or name [x]
+- [x] ::find method to find a specific entity by id or name
 
-- ::all method to return ids for all entities of this resource [x]
+- [x] ::all method to return ids for all entities of this resource
 
-- Store and retrieve resources as json text files in an app/db/store
-  folder with filenames that look like: “[id].txt” [x]
+- [x] Store and retrieve resources as json text files in an app/db/store
+  folder with filenames that look like: “[id].txt”.
 
 ### 2. Create a Web API
 
-- Create an appropriately named Roda-based API class in
-  app/controllers/app.rb [x]
+- [x] Create an appropriately named Roda-based API class in
+  `app/controllers/app.rb`.
 
-- Create a root route (/) that returns a basic json message [x]
+- [x] Create a root route (/) that returns a basic json message.
 
-- Create one POST route to create a new resource, given json
-  information about it [x]
+- [x] Create one POST route to create a new resource, given json
+  information about it.
 
-- create one GET route to return details of a specific resource [x]
+- [x] create one GET route to return details of a specific resource.
 
-- create one GET route to return an ID list of all resources [x]
+- [x] create one GET route to return an ID list of all resources.
 
-- Create a helpful README.md with instructions on how to use your API,
-  including all routes [x]
+- [x] Create a helpful README.md with instructions on how to use your API,
+  including all routes.
 
-- Create a LICENSE file with terms of how your code can be adapted by
-  others [x]
+- [x] Create a LICENSE file with terms of how your code can be adapted by
+  others.
