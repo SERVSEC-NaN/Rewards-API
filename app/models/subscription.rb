@@ -18,6 +18,9 @@ module Rewards
     plugin :uuid, field: :id
     plugin :json_serializer
     plugin :validation_helpers
+    plugin :whitelist_security
+
+    set_allowed_columns :title, :description
 
     def validate
       super

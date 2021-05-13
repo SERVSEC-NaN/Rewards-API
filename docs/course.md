@@ -47,8 +47,9 @@ Write a controller route (and tests) to get an account
 
 ## Week 10: Database Hardening
 
-- [x] Prevent mass assignment vulnerabilities by restricting columns Add
-a whitelist of permissible methods to restrict which attributes of
+- [x] Prevent mass assignment vulnerabilities by restricting columns
+
+Add a whitelist of permissible methods to restrict which attributes of
 your models can be changed by a mass assignment from user input Add
 tests to ensure that mass assignment does not work (returns 400 Bad
 Request).
