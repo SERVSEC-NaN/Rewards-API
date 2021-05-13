@@ -8,10 +8,10 @@ with them.</p>
 
 ## Documentation
 
-- [Service Security](docs/course.md)
-
 - [Setup](docs/setup.md)
+
+- [API](docs/api.md)
 
 - [Entity Relationship](docs/entity-relationship.md)
 
-- [API](docs/api.md)
+- [Service Security (TAs click here)](docs/course.md)

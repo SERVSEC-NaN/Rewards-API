@@ -1,13 +1,27 @@
 <h1 align="center">Setup</h1>
 
-Don't forget to update the gems
+Just run
 
-`bundle install`
+```sh
+bin/setup
+```
 
-Firstly, migrate the database
+Which translates to:
 
-`RACK_ENV=test rake db:migrate`
+Install/Update the gems.
 
-## Run unit tests
+```sh
+bundle install
+```
 
-`RACK_ENV=test bundle exec rake api_test`
+Migrates the test database.
+
+```sh
+RACK_ENV=test rake db:migrate
+```
+
+Migrates the development database.
+
+```sh
+rake db:migrate
+```
