@@ -37,6 +37,12 @@ describe 'Test Subscriber Handling' do
       _(last_response.status).must_equal 404
     end
 
+    it 'SECURITY: should not use deterministic integers as ID' do
+      subscriber = Rewards::Subscriber.create(phone: '1234561')
+      id = subscriber.id
+      _(id.is_a?(Numeric)).must_equal false
+    end
+
     it 'SECURITY: should prevent basic SQL injection targeting IDs' do
       Rewards::Subscriber.create(phone: '08123456432')
       Rewards::Subscriber.create(phone: '088765432')

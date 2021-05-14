@@ -38,6 +38,12 @@ describe 'Test Promoter Handling' do
       _(last_response.status).must_equal 404
     end
 
+    it 'SECURITY: should not use deterministic integers as ID' do
+      promoter = Rewards::Promoter.create name: 'Promoter2', organization: 'Org2', email: '2@mail.com'
+      id = promoter.id
+      _(id.is_a?(Numeric)).must_equal false
+    end
+
     it 'SECURITY: should prevent basic SQL injection targeting IDs' do
       Rewards::Promoter.create name: 'Promoter2', organization: 'Org2', email: '2@mail.com'
       get "#{api_root}/2%20or%20id%3E0"

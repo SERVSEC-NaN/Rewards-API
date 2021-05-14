@@ -37,6 +37,12 @@ describe 'Test Subscription Handling' do
       _(last_response.status).must_equal 404
     end
 
+    it 'SECURITY: should not use deterministic integers as ID' do
+      subscription = Rewards::Subscription.create title: 'Subscription Title', description: 'Details about Subscription'
+      id = subscription.id
+      _(id.is_a?(Numeric)).must_equal false
+    end
+
     it 'SECURITY: should prevent basic SQL injection targeting IDs' do
       Rewards::Subscription.create title: 'Subscription Title', description: 'Details about Subscription'
       get "#{api_root}/2%20or%20id%3E0"
