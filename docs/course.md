@@ -64,12 +64,12 @@ migrations and models for those tables to use UUIDs instead Use a uuid
 type in your migrations Use the :uuid plugin in Sequel models to
 autogenerate UUIDs.
 
-- [ ] Encrypt any sensitive columns that should not be read if your
+- [x] Encrypt any sensitive columns that should not be read if your
 database is stolen Discuss as a team which columns of which tables
 contain the most sensitive data Create a SecureDB library class to
 encrypt/decrypt sensitive methods.
 
-- [ ] Create a database key for your development and test environments
+- [x] Create a database key for your development and test environments
 only for now Encrypt!
 
 Don't forget to put your config/secrets.yml file in .gitignore.
@@ -78,7 +78,7 @@ Change the name of encrypted columns (with a prefix/suffix like
 secure_ or _secure) Create reader and writer methods in your models to
 encrypt/decrypt columns on demand.
 
-- [ ] Add Info/Warning/Error Logs Log warnings for mass assignment
+- [x] Add Info/Warning/Error Logs Log warnings for mass assignment
 attempts (display keys involved but do not log actual data!)  Log
 errors for any unknown errors (typically 500 server errors) BONUS:
 Notice that we cannot search through secured (encrypted) fields in our
