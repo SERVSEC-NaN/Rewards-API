@@ -28,7 +28,6 @@ describe 'Test Promoter Handling' do
       _(last_response.status).must_equal 200
 
       result = JSON.parse last_response.body
-      _(result['name']).must_equal promoter.name
       _(result['organization']).must_equal promoter.organization
       _(result['email']).must_equal promoter.email
     end

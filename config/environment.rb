@@ -4,6 +4,7 @@ require 'roda'
 require 'figaro'
 require 'logger'
 require 'sequel'
+require_relative '../app/lib/secure_db'
 
 module Rewards
   # Configuration for the API
