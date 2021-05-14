@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rake/testtask'
+require_relative 'require_app'
 
 task default: :spec
 
@@ -47,6 +48,14 @@ end
 desc 'Run application console (pry)'
 task console: :print_env do
   sh 'pry -r ./spec/test_load_all'
+end
+
+namespace :newkey do
+  desc 'Create sample cryptographic key for database'
+  task :db do
+    require_app 'lib'
+    p "DB_KEY: \'#{SecureDB.generate_key}\'"
+  end
 end
 
 namespace :db do
