@@ -14,9 +14,10 @@ gem 'rbnacl'
 gem 'require_all'
 
 # Database
-gem 'hirb'
 gem 'sequel'
+
 group :development, :test do
+  gem 'hirb'
   gem 'pry'
   gem 'rerun'
   gem 'rubocop'
