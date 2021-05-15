@@ -35,12 +35,6 @@ describe 'Test Tag Handling' do
       _(last_response.status).must_equal 404
     end
 
-    it 'SECURITY: should not use deterministic integers as ID' do
-      tag = Rewards::Tag.create name: 'T1'
-      id  = tag.id
-      _(id.is_a?(Numeric)).must_equal false
-    end
-
     it 'SECURITY: should prevent basic SQL injection targeting IDs' do
       Rewards::Tag.create name: 'Tag1'
       Rewards::Tag.create name: 'Tag2'

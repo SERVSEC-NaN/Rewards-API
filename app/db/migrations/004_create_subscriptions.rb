@@ -5,7 +5,7 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:subscriptions) do
-      uuid :id, primary_key: true
+      primary_key :id
       foreign_key :promoter_id, table: :promoters,
                                 type: 'char(36)' # UUID
       String :title, null: false

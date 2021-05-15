@@ -9,7 +9,6 @@ module Rewards
     many_to_many :subscriptions, left_key: :tag_id, right_key: :subscription_id,
                                  join_table: :subscriptions_tags
 
-    plugin :uuid, field: :id
     plugin :json_serializer
     plugin :validation_helpers
     plugin :whitelist_security

@@ -5,7 +5,7 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:tags) do
-      uuid :id, primary_key: true
+      primary_key :id
       String :name, unique: true, null: false
     end
   end
