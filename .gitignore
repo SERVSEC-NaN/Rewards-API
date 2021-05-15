@@ -1,5 +1,4 @@
 app/db/store/*.db
 config/secrets.yml
-bin/
 .bundle/
 Gemfile.lock
