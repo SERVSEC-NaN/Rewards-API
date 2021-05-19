@@ -7,7 +7,7 @@ module Rewards
   # Web controller for Rewards API
   class Api < Roda
     PLUGINS = %i[all_verbs halt json].freeze
-    MODELS = %w[subscriber subscription promoter tag].freeze
+    MODELS = %w[subscriber promotion promoter tag].freeze
     API_ROOT = 'api/v1'
 
     PLUGINS.each { |p| plugin p }

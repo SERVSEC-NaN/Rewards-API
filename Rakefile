@@ -16,7 +16,7 @@ end
 desc 'Tests API specs only'
 task :api_spec do
   sh 'ruby spec/integration/api_spec.rb'
-  %w[subscriber subscription promoter tag].each do |model|
+  %w[subscriber promotion promoter tag].each do |model|
     sh "ruby spec/integration/api_#{model}s_spec.rb"
   end
 end
