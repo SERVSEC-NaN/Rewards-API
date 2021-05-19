@@ -2,11 +2,11 @@
 
 module Rewards
   # Service object to create a new subscription for a promoter
-  class CreateSubscriptionForPromoter
-    def self.call(promoter_id:, subscription_data:)
+  class CreatePromotion
+    def self.call(promoter_id:, promotion_data:)
       Promoter
         .find(id: promoter_id)
-        .add_subscription(subscription_data)
+        .add_promotion(promotion_data)
     end
   end
 end

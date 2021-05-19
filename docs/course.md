@@ -20,7 +20,7 @@ collaborators vs. collaborations) Use association_dependencies to
 maintain table integrity (use destroy or nullify to specify how to
 cascade resource destruction).
 
-- [ ] Use service objects to cleanup controllers and reuse functionality
+- [x] Use service objects to cleanup controllers and reuse functionality
 
 Create service objects wherever you find you have to write chained
 methods multiple lines to create or change resources Reuse your
