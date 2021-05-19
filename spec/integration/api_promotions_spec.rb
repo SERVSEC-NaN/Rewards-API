@@ -9,17 +9,15 @@ describe 'Test Promotion Handling' do
 
   before do
     wipe_database
-    @promoter = Rewards::Promoter
-                .create name: 'P1', organization: 'O1', email: '1@m.com'
   end
 
   describe 'Getting Promotions' do
     it 'HAPPY: should be able to get list of all promotions' do
       Rewards::Promotion
-        .create title: 'T1', description: 'D1', promoter_id: @promoter.id
+        .create title: 'T1', description: 'D1'
 
       Rewards::Promotion
-        .create title: 'T2', description: 'D2', promoter_id: @promoter.id
+        .create title: 'T2', description: 'D2'
 
       get api_root
       _(last_response.status).must_equal 200
@@ -30,7 +28,7 @@ describe 'Test Promotion Handling' do
 
     it 'HAPPY: should be able to get details of a single promotion' do
       promotion = Rewards::Promotion
-                  .create title: 'T3', description: 'D1', promoter_id: @promoter.id
+                  .create title: 'T3', description: 'D1'
 
       id = promotion.id
 
@@ -49,7 +47,7 @@ describe 'Test Promotion Handling' do
 
     it 'SECURITY: should prevent basic SQL injection targeting IDs' do
       Rewards::Promotion
-        .create title: 'T3', description: 'D1', promoter_id: @promoter.id
+        .create title: 'T3', description: 'D1'
 
       get "#{api_root}/2%20or%20id%3E0"
 

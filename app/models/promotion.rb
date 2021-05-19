@@ -18,11 +18,11 @@ module Rewards
     plugin :whitelist_security
     plugin :timestamps, update_on_create: true
 
-    set_allowed_columns :title, :description, :promoter_id
+    set_allowed_columns :title, :description
 
     def validate
       super
-      validates_presence %i[title description promoter_id]
+      validates_presence %i[title description]
     end
   end
 end

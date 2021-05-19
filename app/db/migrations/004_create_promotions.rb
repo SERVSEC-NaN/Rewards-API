@@ -8,9 +8,9 @@ Sequel.migration do
       primary_key :id
       # Table that foreign key references needs to be set explicitly
       # for a database foreign key reference to be created.
-      foreign_key :promoter_id, :promoters, null: false
+      foreign_key :promoter_id, table: :promoters, type: 'uuid'
 
-      String :title, unique: true, null: false
+      String :title, null: false
       String :description, null: false
 
       DateTime :created_at
