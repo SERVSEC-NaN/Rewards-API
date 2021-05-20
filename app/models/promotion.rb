@@ -13,7 +13,6 @@ module Rewards
 
     many_to_one :promoters
 
-    plugin :json_serializer
     plugin :validation_helpers
     plugin :whitelist_security
     plugin :timestamps, update_on_create: true
@@ -24,5 +23,21 @@ module Rewards
       super
       validates_presence %i[title description]
     end
+
+    # rubocop:disable Metrics/MethodLength
+    def to_json(options = {})
+      JSON(
+        {
+          type: 'promotion',
+          attributes: {
+            id: id,
+            title: title,
+            description: description
+          },
+          include: { tags: tags }
+        }, options
+      )
+    end
+    # rubocop:enable Metrics/MethodLength
   end
 end

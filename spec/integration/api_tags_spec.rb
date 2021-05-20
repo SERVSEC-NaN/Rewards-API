@@ -28,8 +28,8 @@ describe 'Test Tag Handling' do
       _(last_response.status).must_equal 200
 
       result = JSON.parse last_response.body
-      _(result['id']).must_equal @tag.id
-      _(result['name']).must_equal @tag.name
+      _(result['attributes']['id']).must_equal @tag.id
+      _(result['attributes']['name']).must_equal @tag.name
     end
 
     it 'SAD: should return error if unknown tag requested' do

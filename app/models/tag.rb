@@ -11,7 +11,6 @@ module Rewards
 
     plugin :association_dependencies, promotions: :nullify
 
-    plugin :json_serializer
     plugin :validation_helpers
     plugin :whitelist_security
     plugin :timestamps, update_on_create: true
@@ -22,6 +21,19 @@ module Rewards
       super
       validates_presence :name
       validates_unique   :name
+    end
+
+    def to_json(options = {})
+      JSON(
+        {
+          type: 'promotion',
+          attributes: {
+            id: id,
+            name: name
+          },
+          include: { promotions: promotions }
+        }, options
+      )
     end
   end
 end

@@ -36,8 +36,8 @@ describe 'Test Promotion Handling' do
       _(last_response.status).must_equal 200
 
       result = JSON.parse last_response.body
-      _(result['title']).must_equal promotion.title
-      _(result['description']).must_equal promotion.description
+      _(result['attributes']['title']).must_equal promotion.title
+      _(result['attributes']['description']).must_equal promotion.description
     end
 
     it 'SAD: should return error if unknown promotion requested' do

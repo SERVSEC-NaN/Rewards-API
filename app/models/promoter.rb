@@ -35,5 +35,22 @@ module Rewards
       validates_unique %i[organization email]
       super
     end
+
+    # rubocop:disable Metrics/MethodLength
+    def to_json(options = {})
+      JSON(
+        {
+          type: 'promoter',
+          attributes: {
+            id: id,
+            name: name,
+            organization: organization,
+            email: email
+          },
+          include: { promoter: promotions }
+        }, options
+      )
+    end
+    # rubocop:enable Metrics/MethodLength
   end
 end

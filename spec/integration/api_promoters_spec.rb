@@ -31,8 +31,8 @@ describe 'Test Promoter Handling' do
       _(last_response.status).must_equal 200
 
       result = JSON.parse last_response.body
-      _(result['organization']).must_equal @promoter.organization
-      _(result['email']).must_equal @promoter.email
+      _(result['attributes']['organization']).must_equal @promoter.organization
+      _(result['attributes']['email']).must_equal @promoter.email
     end
 
     it 'SAD: should return error if unknown promoter requested' do

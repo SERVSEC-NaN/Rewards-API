@@ -12,7 +12,6 @@ module Rewards
     plugin :association_dependencies, promoters: :nullify
 
     plugin :uuid, field: :id
-    plugin :json_serializer
     plugin :validation_helpers
     plugin :whitelist_security
     plugin :timestamps, update_on_create: true
@@ -23,6 +22,19 @@ module Rewards
       super
       validates_presence :phone
       validates_unique   :phone
+    end
+
+    def to_json(options = {})
+      JSON(
+        {
+          type: 'subscriber',
+          attributes: {
+            id: id,
+            phone: phone
+          },
+          include: { promoters: promoters }
+        }, options
+      )
     end
   end
 end

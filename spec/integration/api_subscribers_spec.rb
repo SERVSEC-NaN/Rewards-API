@@ -31,8 +31,8 @@ describe 'Test Subscriber Handling' do
       _(last_response.status).must_equal 200
 
       result = JSON.parse last_response.body
-      _(result['id']).must_equal @subscriber.id
-      _(result['phone']).must_equal @subscriber.phone
+      _(result['attributes']['id']).must_equal @subscriber.id
+      _(result['attributes']['phone']).must_equal @subscriber.phone
     end
 
     it 'SAD: should return error if unknown subscriber requested' do
