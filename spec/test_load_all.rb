@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rack/test'
-require_relative '../require_app'
+require_relative '../config/require_app'
 
 require_app
 
