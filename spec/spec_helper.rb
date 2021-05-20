@@ -8,7 +8,8 @@ require 'yaml'
 
 require_relative 'test_load_all'
 
-TABLES = %i[subscribers promoters promotions tags].freeze
+# Should first remove dependancies
+TABLES = %i[promotions subscribers tags promoters].freeze
 
 def wipe_database
   TABLES.each do |table|
