@@ -72,7 +72,7 @@ namespace :db do
 
   desc 'Delete database'
   task :delete do
-    %i[subscribers subscriptions promoters tags].each do |table|
+    TABLES.each do |table|
       app.DB[table].delete
     end
   end

@@ -8,8 +8,6 @@ require 'minitest/rg'
 require_relative 'test_load_all'
 
 # Should first remove dependencies
-TABLES = %i[promotions tags subscribers promoters].freeze
-
 def wipe_database
   TABLES.each do |table|
     app.DB[table].delete
