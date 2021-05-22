@@ -2,9 +2,24 @@
 
 [Continuation here](https://github.com/SERVSEC-NaN/Rewards-UI#readme)
 
-## Week 11: User Accounts.
+# Week 12: Authentication and Sessions
 
-- [ ] User accounts: let's create/update accounts for users Implement
+- [x] 1. Updating our Web API Structure (optional) Split your controller
+into multiple files Use the multi_route plugin for Roda to dispatch
+requests to the right routing block
+
+- [ ] 2. Add POST route to Web API to authenticate credentials e.g., POST
+'/api/v1/auth/authentication' If username/password is correct, return
+JSONified user information Otherwise, return a 403 error code with a
+json message body.
+
+- [x] 3. Require SSL connections to Web API Check protocol schema for
+incoming requests Block non-secure requests for production (HTTP)
+
+
+# Week 11: User Accounts.
+
+- [x] User accounts: let's create/update accounts for users Implement
 salted, hashed (with key-stretching) passwords.
 
 Create a KeyStretching module Create a Password model Write
@@ -89,7 +104,7 @@ fields that we can use for searching.
 
 ##  Week 9: Databases and ORM
 
-### 1. Write migrations to create relational tables for your project:
+## 1. Write migrations to create relational tables for your project:
 
 - [x] Identify two model entities you need for your project, define
   corresponding database tables.
@@ -108,9 +123,9 @@ fields that we can use for searching.
 - [x] Follow the plural/singular conventions of database tables and
   foreign keys.
 
-### 2. Playing with Models!
+## 2. Playing with Models!
 
-### 3. Update your routes and test them!
+## 3. Update your routes and test them!
 
 - [x] Test the root route of your Web API to make sure it returns a valid
   message.
@@ -133,9 +148,9 @@ fields that we can use for searching.
     - [x] Be able to POST to create a single resource of that type.
 
 
-##  Week 8: HTTP and Web APIs
+#  Week 8: HTTP and Web APIs
 
-### 1. Create a basic domain resource entity class
+## 1. Create a basic domain resource entity class
 
 - [x] The #initialize method should create a new object
 
@@ -152,7 +167,7 @@ fields that we can use for searching.
 - [x] Store and retrieve resources as json text files in an app/db/store
   folder with filenames that look like: “[id].txt”.
 
-### 2. Create a Web API
+## 2. Create a Web API
 
 - [x] Create an appropriately named Roda-based API class in
   `app/controllers/app.rb`.
