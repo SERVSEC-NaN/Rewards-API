@@ -23,14 +23,19 @@ task :api_spec do
   end
 end
 
-desc 'Runs rubocop on tested code'
-task style: %i[spec audit] do
-  sh 'rubocop .'
+desc 'Rerun tests on live code changes'
+task :respec do
+  sh 'rerun -c rake spec'
 end
 
 desc 'Start server'
 task :server do
   sh 'bundle exec rackup'
+end
+
+desc 'Runs rubocop on tested code'
+task style: %i[spec audit] do
+  sh 'rubocop .'
 end
 
 desc 'Update vulnerabilities lit and audit gems'
@@ -44,7 +49,7 @@ task release: %i[spec style audit] do
 end
 
 task :print_env do
-  puts "Environment: #{ENV['RACK_ENV'] || 'development'}"
+  puts "Environment: #{ENV['RACK_ENV']}"
 end
 
 desc 'Run application console (pry)'
@@ -87,4 +92,12 @@ namespace :db do
 
   desc 'Delete and migrate again'
   task reset: %i[drop migrate]
+end
+
+namespace :newkey do
+  desc 'Create sample cryptographic key for database'
+  task :db do
+    require_app('lib')
+    puts "DB_KEY: #{SecureDB.generate_key}"
+  end
 end
