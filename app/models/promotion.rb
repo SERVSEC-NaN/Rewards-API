@@ -34,7 +34,10 @@ module Rewards
             title: title,
             description: description
           },
-          include: { tags: tags }
+          include: {
+            promoter: promoter_id,
+            tags: tags
+          }
         }, options
       )
     end
