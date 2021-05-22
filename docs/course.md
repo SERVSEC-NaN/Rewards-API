@@ -1,5 +1,7 @@
 <h1 align="center">Service Security Class</h1>
 
+[Continuation here](https://github.com/SERVSEC-NaN/Rewards-UI#readme)
+
 ## Week 11: User Accounts.
 
 - [ ] User accounts: let's create/update accounts for users Implement
