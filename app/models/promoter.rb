@@ -47,7 +47,7 @@ module Rewards
             organization: organization,
             email: email
           },
-          include: { promoter: promotions }
+          include: { promotions: promotions }
         }, options
       )
     end
