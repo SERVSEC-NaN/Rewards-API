@@ -4,12 +4,11 @@ ENV['RACK_ENV'] = 'test'
 
 require 'minitest/autorun'
 require 'minitest/rg'
-require 'yaml'
 
 require_relative 'test_load_all'
 
-# Should first remove dependancies
-TABLES = %i[promotions subscribers tags promoters].freeze
+# Should first remove dependencies
+TABLES = %i[promotions tags subscribers promoters].freeze
 
 def wipe_database
   TABLES.each do |table|
