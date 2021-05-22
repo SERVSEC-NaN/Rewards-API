@@ -2,9 +2,9 @@
 
 <br/>
 
-<p align="center"> Your time and personal information is valuable to you. It is also
-valuable to business. Let them <strong>reward</strong> you for sharing those things
-with them.</p>
+<p align="center"> Your time and personal information is valuable to
+you. It is also valuable to business. Let them <strong>reward</strong>
+you for sharing those things with them.</p>
 
 ## Documentation
 
