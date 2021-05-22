@@ -3,6 +3,8 @@
 require 'rake/testtask'
 require_relative 'config/require_app'
 
+ENV['RACK_ENV'] ||= 'development'
+
 task default: :spec
 
 desc 'Test all the specs'
