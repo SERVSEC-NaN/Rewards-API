@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './require_app'
+require_relative './config/require_app'
 require_app
 
 run Rewards::Api.freeze.app

@@ -6,13 +6,15 @@ require 'sequel'
 module Rewards
   # Models a subscriber
   class Subscriber < Sequel::Model
-    many_to_many :subscriptions, left_key: :subscription_id, right_key: :subscriber_id,
-                                 join_table: :subscriptions_subscribers
+    many_to_many :promoters, left_key: :subscriber_id, right_key: :promoter_id,
+                             join_table: :subscriptions
+
+    plugin :association_dependencies, promoters: :nullify
 
     plugin :uuid, field: :id
-    plugin :json_serializer
     plugin :validation_helpers
     plugin :whitelist_security
+    plugin :timestamps, update_on_create: true
 
     set_allowed_columns :phone
 
@@ -20,6 +22,19 @@ module Rewards
       super
       validates_presence :phone
       validates_unique   :phone
+    end
+
+    def to_json(options = {})
+      JSON(
+        {
+          type: 'subscriber',
+          attributes: {
+            id: id,
+            phone: phone
+          },
+          include: { promoters: promoters }
+        }, options
+      )
     end
   end
 end

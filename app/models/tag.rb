@@ -6,12 +6,14 @@ require 'sequel'
 module Rewards
   # Models a tag
   class Tag < Sequel::Model
-    many_to_many :subscriptions, left_key: :tag_id, right_key: :subscription_id,
-                                 join_table: :subscriptions_tags
+    many_to_many :promotions, left_key: :tag_id, right_key: :promotion_id,
+                              join_table: :promotion_tags
 
-    plugin :json_serializer
+    plugin :association_dependencies, promotions: :nullify
+
     plugin :validation_helpers
     plugin :whitelist_security
+    plugin :timestamps, update_on_create: true
 
     set_allowed_columns :name
 
@@ -19,6 +21,19 @@ module Rewards
       super
       validates_presence :name
       validates_unique   :name
+    end
+
+    def to_json(options = {})
+      JSON(
+        {
+          type: 'promotion',
+          attributes: {
+            id: id,
+            name: name
+          },
+          include: { promotions: promotions }
+        }, options
+      )
     end
   end
 end

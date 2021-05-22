@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rake/testtask'
-require_relative 'require_app'
+require_relative 'config/require_app'
 
 task default: :spec
 
@@ -15,9 +15,9 @@ end
 
 desc 'Tests API specs only'
 task :api_spec do
-  sh 'ruby spec/integration/api_spec.rb'
-  %w[subscriber subscription promoter tag].each do |model|
-    sh "ruby spec/integration/api_#{model}s_spec.rb"
+  Rake::TestTask.new(:api_spec) do |t|
+    t.pattern = 'spec/integration/**/*_spec.rb'
+    t.warning = false
   end
 end
 
@@ -50,20 +50,12 @@ task console: :print_env do
   sh 'pry -r ./spec/test_load_all'
 end
 
-namespace :newkey do
-  desc 'Create sample cryptographic key for database'
-  task :db do
-    require_app 'lib'
-    p "DB_KEY: \'#{SecureDB.generate_key}\'"
-  end
-end
-
 namespace :db do
   require 'sequel'
   require_relative 'config/environment'
 
   Sequel.extension :migration
-  app = Rewards::Api
+  app = Rewards::Api.freeze
 
   desc 'Run migrations'
   task migrate: :print_env do
@@ -80,10 +72,15 @@ namespace :db do
 
   desc 'Delete dev or test database file'
   task :drop do
-    (p 'Cannot wipe production database!' && return) if app.environment == :production
-    db_filename = "app/db/store/#{Rewards::Api.environment}.db"
-    FileUtils.rm db_filename
-    puts "Deleted #{db_filename}"
+    if app.environment == :production
+      p 'Cannot wipe production database!'
+    else
+      db_filename = "app/db/store/#{app.environment}.db"
+      unless File.exist? db_filename
+        FileUtils.rm db_filename
+        puts "Deleted #{db_filename}"
+      end
+    end
   end
 
   desc 'Delete and migrate again'
