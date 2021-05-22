@@ -58,9 +58,9 @@ module Rewards
         routing.halt(404, { message: 'Could not find promoters' })
       end
 
-      # POST api/v1/promoters
+      # POST api/v1/promoters/[promoter_data]
       routing.post do
-        promoter = Promoter.new JSON.parse(routing.body.read)
+        promoter = Promoter.new JSON.parse(routing.body.read, symbolize_names: true)
         raise('Could not save promoter') unless promoter.save
 
         response.status = 201

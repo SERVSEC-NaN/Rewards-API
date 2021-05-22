@@ -9,12 +9,17 @@ describe 'Test Promoter Handling' do
 
   before do
     wipe_database
-    @request_header = { 'CONTENT_TYPE' => 'application/json' }
     data = { name: 'P1', organization: '1', email: '1@m.com' }
     @promoter = Rewards::Promoter.create data
   end
 
   describe 'Getting Promoters' do
+    it 'HAPPY: should create a promoter' do
+      data = { name: 'P2', organization: '2', email: '2@m.com' }
+      post api_root, data.to_json
+      assert_equal last_response.status, 201
+    end
+
     it 'HAPPY: should be able to get list of all promoters' do
       data = { name: 'P2', organization: 'O2', email: '2@m.com' }
       Rewards::Promoter.create data

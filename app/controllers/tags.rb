@@ -1,0 +1,62 @@
+# frozen_string_literal: true
+
+require 'roda'
+require 'json'
+require_relative 'app'
+
+module Rewards
+  # Web controller for Rewards API
+  class Api < Roda
+    route('tags') do |routing|
+      @tag_route = "#{@api_root}/tags"
+      routing.on String do |tag_id|
+        routing.on 'promotion' do
+          # POST api/v1/tags/[tag_id]/promotion/[promotion_id]
+          routing.post do
+            promotion_id = JSON.parse(routing.body.read)
+            AddTagtoPromotion
+              .call promotion_id: promotion_id, tag_id: tag_id
+
+            response.status = 201
+            location = "#{@tag_route}/#{tag_id}/promotion/#{promotion_id}"
+            response['Location'] = location
+            { message: 'Promotion tagged', data: promotion_id }
+          rescue Sequel::MassAssignmentRestriction
+            routing.halt 400, { message: 'Illegal Request' }
+          rescue StandardError
+            routing.halt 500, { message: 'Database error' }
+          end
+        end
+
+        # GET api/v1/tags/[tag_id]
+        routing.get do
+          tag = Tag.first(id: tag_id)
+          tag ? tag.to_json : raise('Could not find tags')
+        rescue StandardError => e
+          routing.halt(404, { message: e.message })
+        end
+      end
+
+      # GET api/v1/tags/
+      routing.get do
+        JSON.pretty_generate({ data: Tag.all })
+      rescue StandardError
+        routing.halt(404, { message: 'Could not find tags' })
+      end
+
+      # POST api/v1/tags
+      routing.post do
+        tag = Tag.new name: JSON.parse(routing.body.read)
+        raise('Could not save tag') unless tag.save
+
+        response.status = 201
+        response['Location'] = "#{@tag_route}/#{tag.id}"
+        { message: 'Tag saved', data: tag }
+      rescue Sequel::MassAssignmentRestriction
+        routing.halt 400, { message: 'Illegal Request' }
+      rescue StandardError => e
+        routing.halt 500, { message: e.message }
+      end
+    end
+  end
+end

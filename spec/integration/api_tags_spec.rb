@@ -12,36 +12,51 @@ describe 'Test Tag Handling' do
   end
 
   describe 'Getting Tags' do
+    it 'HAPPY: should create a tag' do
+      tag_name = 'lol'
+
+      post api_root, tag_name.to_json
+      assert_equal last_response.status, 201
+    end
+
     it 'HAPPY: should be able to get list of all tags' do
+      Rewards::Tag.create name: 'Tag3'
       Rewards::Tag.create name: 'Tag2'
 
       get api_root
-      _(last_response.status).must_equal 200
+      assert last_response.ok?
+
       result = JSON.parse last_response.body
-      _(result.count).must_equal 2
+      assert_equal result['data'].count, 3
     end
 
     it 'HAPPY: should be able to get details of a single tag' do
-      id  = @tag.id
-
-      get "#{api_root}/#{id}"
-      _(last_response.status).must_equal 200
+      get "#{api_root}/#{@tag.id}"
+      assert last_response.ok?
 
       result = JSON.parse last_response.body
-      _(result['attributes']['id']).must_equal @tag.id
-      _(result['attributes']['name']).must_equal @tag.name
+      assert_equal result['attributes']['name'], @tag.name
+    end
+
+    it 'HAPPY: should add a tag to a promotion' do
+      promotion =
+        Rewards::Promotion
+        .create title: 'T', description: 'D'
+
+      post "#{api_root}/#{@tag.id}/promotion", promotion.id.to_json
+      assert_equal last_response.status, 201
     end
 
     it 'SAD: should return error if unknown tag requested' do
       get "#{api_root}/foobar"
-      _(last_response.status).must_equal 404
+      assert_equal last_response.status, 404
     end
 
     it 'SECURITY: should prevent basic SQL injection targeting IDs' do
       get "#{api_root}/2%20or%20id%3E0"
 
-      _(last_response.status).must_equal 404
-      _(last_response.body['data']).must_be_nil
+      assert_equal last_response.status, 404
+      assert_nil last_response.body['data']
     end
   end
 end

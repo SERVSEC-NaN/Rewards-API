@@ -16,10 +16,12 @@ describe 'Test Promotion Handling' do
   describe 'Getting Promotions' do
     it 'HAPPY: should be able to get list of all promotions' do
       Rewards::CreatePromotion
-        .call(promoter_id: @promoter.id, promotion_data: { title: 'T1', description: 'D1' })
+        .call(promoter_id: @promoter.id,
+              promotion_data: { title: 'T1', description: 'D1' })
 
       Rewards::CreatePromotion
-        .call(promoter_id: @promoter.id, promotion_data: { title: 'T1', description: 'D1' })
+        .call(promoter_id: @promoter.id,
+              promotion_data: { title: 'T1', description: 'D1' })
 
       get api_root
       assert last_response.ok?
@@ -29,11 +31,13 @@ describe 'Test Promotion Handling' do
     end
 
     it 'HAPPY: should be able to get details of a single promotion' do
-      promotion = Rewards::CreatePromotion
-                  .call(promoter_id: @promoter.id, promotion_data: { title: 'T1', description: 'D1' })
+      promotion =
+        Rewards::CreatePromotion
+        .call promoter_id: @promoter.id,
+              promotion_data: { title: 'T1', description: 'D1' }
 
       get "#{api_root}/#{promotion.id}"
-      _(last_response.status).must_equal 200
+      assert last_response.ok?
 
       result = JSON.parse last_response.body
       assert_equal result['attributes']['title'], promotion.title
