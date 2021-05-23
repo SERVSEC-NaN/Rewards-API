@@ -1,11 +1,6 @@
 #!/usr/bin/env sh
-set -euo pipefail
-IFS=$'\n\t'
 
 bundle install
-
-# Other automated setup tasks
 mkdir -p ./app/db/store ||:
-
 bundle exec rake db:migrate
 RACK_ENV=test bundle exec rake db:migrate
