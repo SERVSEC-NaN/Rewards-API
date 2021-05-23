@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 # Web API
 gem 'json'
 gem 'puma'
+gem 'rack-cors', require: 'rack/cors'
 gem 'roda'
 
 # Configuration
