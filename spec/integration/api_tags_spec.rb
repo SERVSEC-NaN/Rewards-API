@@ -13,9 +13,9 @@ describe 'Test Tag Handling' do
 
   describe 'Getting Tags' do
     it 'HAPPY: should create a tag' do
-      tag_name = 'lol'
+      data = { name: 'lol ' }
 
-      post api_root, tag_name.to_json
+      post api_root, data.to_json
       assert_equal last_response.status, 201
     end
 

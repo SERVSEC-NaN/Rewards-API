@@ -60,7 +60,7 @@ module Rewards
 
       # POST api/v1/promoters/[promoter_data]
       routing.post do
-        promoter = Promoter.new JSON.parse(routing.body.read, symbolize_names: true)
+        promoter = Promoter.new JSON.parse(routing.body.read, seralized_names: true)
         raise('Could not save promoter') unless promoter.save
 
         response.status = 201

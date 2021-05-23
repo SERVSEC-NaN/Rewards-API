@@ -47,7 +47,7 @@ module Rewards
 
       # POST api/v1/subscribers
       routing.post do
-        subscriber = Subscriber.new phone: JSON.parse(routing.body.read)
+        subscriber = Subscriber.new JSON.parse(routing.body.read, seralized_names: true)
         raise('Could not save subscriber') unless subscriber.save
 
         response.status = 201

@@ -15,8 +15,8 @@ describe 'Test Subscriber Handling' do
 
   describe 'Getting subscribers' do
     it 'HAPPY: should create a subscriber' do
-      phone = '0922299'
-      post api_root, phone.to_json
+      data = { phone: '0922299' }
+      post api_root, data.to_json
       assert_equal 201, last_response.status
     end
 

@@ -46,7 +46,7 @@ module Rewards
 
       # POST api/v1/tags
       routing.post do
-        tag = Tag.new name: JSON.parse(routing.body.read)
+        tag = Tag.new JSON.parse(routing.body.read, seralized_names: true)
         raise('Could not save tag') unless tag.save
 
         response.status = 201
