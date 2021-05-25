@@ -1,6 +1,6 @@
 <h1 align="center">Service Security Class</h1>
 
-[Continuation here](https://github.com/SERVSEC-NaN/Rewards-UI#readme)
+[Continuation here](https://github.com/SERVSEC-NaN/Rewards-UI-Ruby#readme)
 
 # Week 12: Authentication and Sessions
 
