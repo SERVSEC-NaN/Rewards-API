@@ -7,7 +7,6 @@ require_relative './password'
 module Rewards
   # Models User Accounts
   class Account < Sequel::Model
-
     plugin :uuid, field: :id
     plugin :whitelist_security
     plugin :timestamps, update_on_create: true
@@ -27,8 +26,10 @@ module Rewards
       JSON(
         {
           type: 'account',
-          id: id,
-          username: username
+          attributes: {
+            id: id,
+            username: username
+          }
         }, options
       )
     end

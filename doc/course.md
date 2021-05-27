@@ -8,7 +8,7 @@
 into multiple files Use the multi_route plugin for Roda to dispatch
 requests to the right routing block
 
-- [ ] 2. Add POST route to Web API to authenticate credentials e.g., POST
+- [x] 2. Add POST route to Web API to authenticate credentials e.g., POST
 '/api/v1/auth/authentication' If username/password is correct, return
 JSONified user information Otherwise, return a 403 error code with a
 json message body.
@@ -44,7 +44,7 @@ methods multiple lines to create or change resources Reuse your
 service objects in controllers, tests, and code for seeding the
 database.
 
-- [ ] Implement a database seeding task (optional)
+- [x] Implement a database seeding task (optional)
 
 Use the sequel-seed gem to create a `rake db:seed` task for your API Put
 your seeding code in `seeds/<date>_<description>.rb` files (example,

@@ -10,7 +10,7 @@ module Rewards
       routing.is 'authenticate' do
         # POST /api/v1/auth/authenticate
         routing.post do
-          credentials = JSON.parse(symbolize_names: true)
+          credentials = JSON.parse(request.body.read, symbolize_names: true)
           auth_account = AuthenticateAccount.call(credentials)
           auth_account.to_json
         rescue UnauthorizedError => e
