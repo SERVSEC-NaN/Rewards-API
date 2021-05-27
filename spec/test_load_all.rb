@@ -7,4 +7,4 @@ require_app
 
 include Rack::Test::Methods # rubocop:disable Style/MixinUsage
 
-def app = Rewards::Api
+def @app = Rewards::Api

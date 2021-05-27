@@ -10,6 +10,6 @@ require_relative 'test_load_all'
 # Should first remove dependencies
 def wipe_database
   TABLES.each do |table|
-    app.DB[table].delete
+    @app.DB[table].delete
   end
 end
