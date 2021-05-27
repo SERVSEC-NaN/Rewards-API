@@ -94,12 +94,17 @@ namespace :db do
     end
   end
 
-  desc 'Seeds the development database'
+  desc 'Seeds admin account into database'
   task seed: %i[load_models] do
-    require 'sequel/extensions/seed'
-    Sequel::Seed.setup(@app.environment)
-    Sequel.extension :seed
-    Sequel::Seeder.apply(@app.DB, 'app/db/seeds')
+    unless Rewards::Account.first
+      require 'passphrase'
+      p 'Seeding admin account'
+      name = "admin-#{Passphrase::Passphrase.new(number_of_words: 1).passphrase}"
+      pass = Passphrase::Passphrase.new.passphrase
+      Rewards::Account.create(username: name, password: pass)
+      p name
+      p pass
+    end
   end
 end
 

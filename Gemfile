@@ -17,7 +17,6 @@ gem 'require_all'
 # Database
 gem 'passphrase'
 gem 'sequel'
-gem 'sequel-seed'
 
 group :development, :test do
   gem 'hirb'
