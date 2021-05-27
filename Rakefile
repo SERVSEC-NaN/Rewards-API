@@ -83,15 +83,12 @@ namespace :db do
       p 'Cannot wipe production database!'
     else
       db_filename = "app/db/store/#{app.environment}.db"
-      unless File.exist? db_filename
+      if File.exist? db_filename
         FileUtils.rm db_filename
         puts "Deleted #{db_filename}"
       end
     end
   end
-
-  desc 'Delete and migrate again'
-  task reset: %i[drop migrate]
 end
 
 namespace :newkey do
