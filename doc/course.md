@@ -1,6 +1,100 @@
 <h1 align="center">Service Security Class</h1>
 
-[Continuation here](https://github.com/SERVSEC-NaN/Rewards-UI-Ruby#readme)
+[Web App](https://github.com/SERVSEC-NaN/Rewards-UI-Ruby#readme)
+
+# Week 14: Token-based Registration and Authorization
+
+- [ ] 1. Create a registration workflow that verifies user
+      registration using token.
+
+    Web App:
+
+    - Please refer to
+    [link](https://github.com/SERVSEC-NaN/Rewards-UI-Ruby#readme)
+    for Web App details.
+
+    Web API:
+
+    - On registration, check if username/email available.
+    - Use MailGun API (Basic Auth) to send verification email with URL.
+    - Create full account in database only when App confirms all
+      details of account.
+
+- [ ] 2. Web API: Issue and require auth tokens.
+
+    - [ ] Create an AuthToken library:
+      - Refactor SecureDB to extract a Securable module that handles
+        all the crypto logic.
+      - Both SecureDB and AuthToken should extend Securable.
+
+    - [ ] Send back an auth token along with account information
+          whenever an account is authenticated.
+
+    - [ ] Wehenver a route requires accessing an account's resources,
+          check the auth token.
+      - Create helper methods that verify account identity of token
+        with resource owner.
+      - Check token in `HTTP_AUTHENTICATION` header of `HTTP` request
+        has `Bearer <TOKEN>`.
+
+    - [ ] Return `403` for any suspicious cases: token is expired,
+          resource does not belong to account.
+
+- [ ] 3. Web App: Store and use auth tokens.
+
+    > Please refer to
+    > [link](https://github.com/SERVSEC-NaN/Rewards-UI-Ruby#readme) for
+    > Web App details.
+
+- [ ] 4. API+App: Add features in App to view index of resources.
+  - Users can see list of all resources they own.
+
+  - See if you can avoid putting username in API URL – if possible,
+  use the username in `auth_token` to find relevant resources.
+
+
+# Week 13: Secure Sessions
+
+- [ ] 1. App: Strengthening our Web Application (optional) Use WebMock to
+write basic tests for your Web Application’s services Use the
+rack-ssl-enforcer gem to redirect users to HTTPS connections in
+production only
+
+- [x] 2. Deploy your API and App to Heroku API: setup and integrate PostGres
+database App: Ensure that it is talking to the deployed API
+
+> Web API available at: https://reward-api-ruby.herokuapp.com. Please
+> see <a href="api.md">API documentation</a> for details.
+
+> Please refer to
+> [link](https://github.com/SERVSEC-NaN/Rewards-UI-Ruby#readme) for
+> Web App details.
+
+- [x] 3. App: Encrypt session data Create a secure messaging library
+that can encrypt and decrypt messages Use a secret key stored in
+environment variable MSG_KEY Use NaCl’s SimpleBox for all cryptography
+Create a secure session library to securely set and get session
+variables Use the secure messaging library from above for all crypto
+
+- [x] 4. App: Switch our session storage to distributed pool Provision a
+Redis machine on Heroku Specify Redis as our application's session
+store
+
+> Please refer to
+> [link](https://github.com/SERVSEC-NaN/Rewards-UI-Ruby#readme) for Web
+> App details.
+
+- [ ] 5. Create a very basic (and risky!) registration workflow between App
+ and API API: Create a POST route to create accounts given email,
+ username, and password App: Allow users to register accounts Accept
+ posts from a registration form with email, username, and password Use
+ a service object to post the data to your API Notice: We have not
+ performed any verification of account details
+
+> Since we only have created an admin account we do not implement
+> registration feature. Instead, the database is seeded with
+> credentials for admin account that can be logged in with through the
+> Web App.
 
 # Week 12: Authentication and Sessions
 
@@ -61,7 +155,6 @@ Integrate accounts into your API routes:
 Write a controller route (and tests) to create an account
 Write a controller route (and tests) to get an account
 
-
 ## Week 10: Database Hardening
 
 - [x] Prevent mass assignment vulnerabilities by restricting columns
@@ -104,7 +197,7 @@ fields that we can use for searching.
 
 ##  Week 9: Databases and ORM
 
-## 1. Write migrations to create relational tables for your project:
+ 1. Write migrations to create relational tables for your project:
 
 - [x] Identify two model entities you need for your project, define
   corresponding database tables.
@@ -123,9 +216,9 @@ fields that we can use for searching.
 - [x] Follow the plural/singular conventions of database tables and
   foreign keys.
 
-## 2. Playing with Models!
+2. Playing with Models!
 
-## 3. Update your routes and test them!
+3. Update your routes and test them!
 
 - [x] Test the root route of your Web API to make sure it returns a valid
   message.
@@ -150,7 +243,7 @@ fields that we can use for searching.
 
 #  Week 8: HTTP and Web APIs
 
-## 1. Create a basic domain resource entity class
+ 1. Create a basic domain resource entity class
 
 - [x] The #initialize method should create a new object
 
@@ -167,7 +260,7 @@ fields that we can use for searching.
 - [x] Store and retrieve resources as json text files in an app/db/store
   folder with filenames that look like: “[id].txt”.
 
-## 2. Create a Web API
+ 2. Create a Web API
 
 - [x] Create an appropriately named Roda-based API class in
   `app/controllers/app.rb`.
