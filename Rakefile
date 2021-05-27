@@ -97,10 +97,10 @@ namespace :db do
   desc 'Seeds admin account into database'
   task seed: %i[load_models] do
     unless Rewards::Account.first
-      require 'passphrase'
+      require_app 'lib'
       p 'Seeding admin account'
-      name = "admin-#{Passphrase::Passphrase.new(number_of_words: 1).passphrase}"
-      pass = Passphrase::Passphrase.new.passphrase
+      name = 'admin'
+      pass = SecureDB.generate_key
       Rewards::Account.create(username: name, password: pass)
       p name
       p pass

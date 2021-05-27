@@ -11,11 +11,9 @@ gem 'roda'
 
 # Configuration
 gem 'figaro'
-gem 'passphrase'
 gem 'rake'
 gem 'rbnacl'
 gem 'require_all'
-gem 'sqlite3'
 
 # Database
 gem 'hirb', '~>0'
@@ -32,6 +30,7 @@ group :development, :test do
   gem 'rubocop-minitest'
   gem 'rubocop-rake'
   gem 'rubocop-sequel'
+  gem 'sqlite3'
 end
 
 # Testing

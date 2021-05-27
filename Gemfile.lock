@@ -22,8 +22,6 @@ GEM
     parallel (1.20.1)
     parser (3.0.1.1)
       ast (~> 2.4.1)
-    passphrase (1.2.1)
-      sqlite3 (~> 1.0)
     pg (1.2.3)
     pry (0.14.1)
       coderay (~> 1.1)
@@ -82,7 +80,6 @@ DEPENDENCIES
   json
   minitest
   minitest-rg
-  passphrase
   pg
   pry
   puma
