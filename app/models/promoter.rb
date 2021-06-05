@@ -20,7 +20,7 @@ module Rewards
     plugin :whitelist_security
     plugin :timestamps, update_on_create: true
 
-    set_allowed_columns :name, :organization, :email, :password
+    set_allowed_columns :name, :organization, :email
 
     def name
       SecureDB.decrypt(name_secure)
@@ -28,15 +28,6 @@ module Rewards
 
     def name=(plaintext)
       self.name_secure = SecureDB.encrypt plaintext
-    end
-
-    def password=(new_password)
-      self.password_digest = Password.digest new_password
-    end
-
-    def password?(try_password)
-      digest = Rewards::Password.from_digest password_digest
-      digest.correct? try_password
     end
 
     def validate
