@@ -40,11 +40,12 @@ describe 'Test Subscriber Handling' do
     end
 
     it 'HAPPY: should be able to make a subscription (subscriber + promoter)' do
-      data = { name: 'P1', organization: '1', email: '1@m.com' }
-      promoter = Rewards::Promoter.create data
+      details = { name: 'P1', organization: '1', email: '1@m.com' }
+      promoter = Rewards::Promoter.create details
 
-      post "#{api_root}/#{@subscriber.id}/subscribe", promoter.id.to_json
-      assert_equal last_response.status, 201
+      data = { id: promoter.id }.to_json
+      post "#{api_root}/#{@subscriber.id}/subscribe", data
+      assert_equal 201, last_response.status
     end
 
     it 'SAD: should return error if unknown subscriber requested' do

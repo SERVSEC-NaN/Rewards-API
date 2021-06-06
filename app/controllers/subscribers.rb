@@ -13,7 +13,7 @@ module Rewards
         routing.on 'subscribe' do
           # POST api/v1/subscribers/[subscriber_id]/subscribe
           routing.post do
-            promoter_id = JSON.parse(routing.body.read, symbolize_names: true)
+            promoter_id = JSON.parse(routing.body.read, symbolize_names: true)[:id]
             promoter =
               CreateSubscription
               .call subscriber_id: subscriber_id, promoter_id: promoter_id
