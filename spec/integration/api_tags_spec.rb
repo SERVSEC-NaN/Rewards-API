@@ -13,10 +13,10 @@ describe 'Test Tag Handling' do
 
   describe 'Getting Tags' do
     it 'HAPPY: should create a tag' do
-      data = { name: 'lol ' }
+      data = { name: 'lol ' }.to_json
 
-      post api_root, data.to_json
-      assert_equal last_response.status, 201
+      post api_root, data
+      assert_equal 201, last_response.status
     end
 
     it 'HAPPY: should be able to get list of all tags' do
@@ -25,15 +25,13 @@ describe 'Test Tag Handling' do
 
       get api_root
       assert last_response.ok?
-
       result = JSON.parse last_response.body
-      assert_equal result['data'].count, 3
+      assert_equal 3, result['data'].count
     end
 
     it 'HAPPY: should be able to get details of a single tag' do
       get "#{api_root}/#{@tag.id}"
       assert last_response.ok?
-
       result = JSON.parse last_response.body
       assert_equal result['attributes']['name'], @tag.name
     end
@@ -43,8 +41,9 @@ describe 'Test Tag Handling' do
         Rewards::Promotion
         .create title: 'T', description: 'D'
 
-      post "#{api_root}/#{@tag.id}/promotion", promotion.id.to_json
-      assert_equal last_response.status, 201
+      data = { id: promotion.id }.to_json
+      post "#{api_root}/#{@tag.id}/promotion", data
+      assert_equal 201, last_response.status
     end
 
     it 'SAD: should return error if unknown tag requested' do
