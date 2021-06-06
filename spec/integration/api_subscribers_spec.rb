@@ -63,7 +63,7 @@ describe 'Test Subscriber Handling' do
 
       # deliberately not reporting error don't give attacker
       # information
-      assert_equal last_response.status, 404
+      assert_equal 404, last_response.status
       assert_nil last_response.body['data']
     end
   end

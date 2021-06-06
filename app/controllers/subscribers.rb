@@ -21,7 +21,7 @@ module Rewards
             response.status = 201
             location = "#{@subscriber_route}/#{subscriber_id}/subscribe/#{promoter.id}"
             response['Location'] = location
-            { message: 'Subscription Created', data: promoter }
+            { message: 'Subscription Created', data: promoter.id }
           rescue Sequel::MassAssignmentRestriction
             routing.halt 400, { message: 'Illegal Request' }
           rescue StandardError
