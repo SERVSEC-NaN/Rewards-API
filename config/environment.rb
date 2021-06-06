@@ -4,7 +4,7 @@ require 'roda'
 require 'figaro'
 require 'logger'
 require 'sequel'
-require_relative '../app/lib/secure_db'
+require_app 'lib'
 
 module Rewards
   # Configuration for the API
@@ -18,7 +18,6 @@ module Rewards
     Figaro.load
     def self.config = Figaro.env
 
-    # Logger setup
     def self.logger = Logger.new($stderr)
 
     DB = Sequel.connect("#{ENV.delete('DATABASE_URL')}?encoding=utf8")
@@ -27,6 +26,10 @@ module Rewards
     configure :development, :test do
       require 'pry'
       logger.level = Logger::ERROR
+    end
+
+    configure do
+      SecureDB.setup(ENV.delete('DB_KEY'))
     end
   end
 end
