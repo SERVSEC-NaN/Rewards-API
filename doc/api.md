@@ -1,4 +1,4 @@
-<h1 align="center">API Documentation</h1>
+<h1 align="center">API Reference</h1>
 
 Table of contents
 =================
@@ -7,9 +7,9 @@ Table of contents
 * [Execute](#execute)
 * [Test](#test)
 * [Routes](#routes)
-  * [/](#root)
   * [/subscribers](#subscribers)
   * [/promoters](#promoters)
+  * [/promotions](#promotions)
   * [/tags](#tags)
 
 Installation
@@ -50,74 +50,128 @@ bundle exec rake spec
 Routes
 ============
 
-## Root
-
-`/api/v1/`
-
 ## Subscibers
-
-> /api/v1/subscribers
 
 Create a subscriber
 
-`POST api/v1/subscribers`
+```http
+POST api/v1/subscribers
+```
+
+| Parameter      | Type      | Description   |
+| :------------- | :---------| :------------ |
+| `Phone`        | `integer` | **Required**. |
 
 Make a subscription (subscriber + promoter)
 
-`POST api/v1/subscribers/[subscriber_id]/subscribe/[promoter_id]`
+```http
+POST api/v1/subscribers/[subscriber_id]/subscribe
+```
+
+| Parameter | Type      | Description   |
+| :-------- | :-------- | :------------ |
+| `id`      | `uuid`    | **Required**. |
+
 
 Get details of a single subscriber
 
-`GET api/v1/subscribers/[subscriber_id]`
+```http
+GET api/v1/subscribers/[subscriber_id]
+```
 
 Get list of all subscribers
 
-`GET api/v1/subscribers/`
+```http
+GET api/v1/subscribers/
+```
 
 ## Promoters
 
-> /api/v1/promoters
-
 Create a new promoter
 
-`POST api/v1/promoters/`
+```http
+POST api/v1/promoters/
+```
+
+| Parameter      | Type     | Description   |
+| :------------- | :------- | :------------ |
+| `Name`         | `string` | **Required**. |
+| `Organization` | `string` | **Required**. |
+| `Email`        | `string` | **Required**. |
 
 Create a promotion for a promoter
 
-`POST api/v1/promoters/[promoter_id]/promotions`
+```http
+POST api/v1/promoters/[promoter_id]/promotions
+```
+
+| Parameter       | Type     | Description   |
+| :-------------- | :------- | :------------ |
+| `Title`         | `string` | **Required**. |
+| `Description`   | `string` | **Required**. |
 
 Get a promotion's details of a specific promoter
 
-`GET api/v1/promoters/[promoter_id]/promotions/[promotion_id]`
+```http
+GET api/v1/promoters/[promoter_id]/promotions/[promotion_id]
+```
 
 Get all promotions of a specific promoter
 
-`GET api/v1/promoters/[promoter_id]/promotions/`
+```http
+GET api/v1/promoters/[promoter_id]/promotions/
+```
 
 Get details of a specific promoter
 
-`GET api/v1/promoters/[promoter_id]`
+```http
+GET api/v1/promoters/[promoter_id]
+```
 
 Get all promoters
 
-`GET api/v1/promoters/`
+```http
+GET api/v1/promoters/
+```
+
+## Promotions
+
+Get all promotions
+
+```http
+GET api/v1/promotions/
+```
 
 ## Tags
 
-> /api/v1/tags
-
 Create a tag
 
-`POST api/v1/tags`
+```http
+POST api/v1/tags
+```
+
+| Parameter | Type     | Description   |
+| :-------- | :------- | :------------ |
+| `name`    | `string` | **Required**. |
 
 Add a tag to a promotion
 
-`POST api/v1/tags/[tag_id]/promotion/[promotion_id]`
+```http
+POST api/v1/tags/[tag_id]/promotion
+```
+
+| Parameter | Type      | Description   |
+| :-------- | :-------- | :------------ |
+| `id`      | `integer` | **Required**. |
 
 Get specific tag
 
-`GET api/v1/tags/[tag_id]`
+```http
+GET api/v1/tags/[tag_id]
+```
 
 Get all tags
 
-`GET api/v1/tags/`
+```http
+GET api/v1/tags/
+```
