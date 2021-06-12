@@ -10,6 +10,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'roda'
 
 # Configuration
+gem 'erb'
 gem 'figaro'
 gem 'rake'
 gem 'rbnacl'
