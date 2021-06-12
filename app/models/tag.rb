@@ -27,10 +27,7 @@ module Rewards
       JSON(
         {
           type: 'promotion',
-          attributes: {
-            id: id,
-            name: name
-          },
+          attributes: { id: id, name: name },
           include: { promotions: promotions }
         }, options
       )
