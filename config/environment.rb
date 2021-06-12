@@ -4,6 +4,7 @@ require 'roda'
 require 'figaro'
 require 'logger'
 require 'sequel'
+require 'erb'
 require_app 'lib'
 
 module Rewards
@@ -11,10 +12,12 @@ module Rewards
   class Api < Roda
     plugin :environments
 
-    Figaro.application = Figaro::Application.new(
-      environment: environment,
-      path: File.expand_path('config/secrets.yml')
-    )
+    Figaro.application =
+      Figaro::Application.new(
+        environment: environment,
+        path: File.expand_path('config/secrets.yml')
+      )
+
     Figaro.load
     def self.config = Figaro.env
 
