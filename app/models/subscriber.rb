@@ -16,22 +16,19 @@ module Rewards
     plugin :whitelist_security
     plugin :timestamps, update_on_create: true
 
-    set_allowed_columns :phone
+    set_allowed_columns :phone, :email
 
     def validate
       super
-      validates_presence :phone
-      validates_unique   :phone
+      validates_unique :phone
+      validates_unique :email
     end
 
     def to_json(options = {})
       JSON(
         {
           type: 'subscriber',
-          attributes: {
-            id: id,
-            phone: phone
-          },
+          attributes: { id: id, email: email, phone: phone },
           include: { promoters: promoters }
         }, options
       )
