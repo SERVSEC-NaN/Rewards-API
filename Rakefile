@@ -99,9 +99,9 @@ namespace :db do
     unless Rewards::Account.first
       require_app 'lib'
       p 'Seeding admin account'
-      name = 'admin'
+      email = ENV['ADMIN_EMAIL'] || 'admin'
       pass = SecureDB.generate_key
-      Rewards::Account.create(username: name, password: pass)
+      Rewards::Admin.create(email: email, password: pass)
       p name
       p pass
     end
