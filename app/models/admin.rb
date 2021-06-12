@@ -11,7 +11,7 @@ module Rewards
     plugin :whitelist_security
     plugin :timestamps, update_on_create: true
 
-    set_allowed_columns :username, :password
+    set_allowed_columns :email, :password
 
     def password=(new_password)
       self.password_digest = Password.digest new_password
@@ -25,10 +25,10 @@ module Rewards
     def to_json(options = {})
       JSON(
         {
-          type: 'account',
+          type: 'admin',
           attributes: {
             id: id,
-            username: username
+            email: email
           }
         }, options
       )
