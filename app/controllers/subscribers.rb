@@ -21,11 +21,11 @@ module Rewards
             response.status = 201
             location = "#{@subscriber_route}/#{subscriber_id}/subscribe/#{promoter.id}"
             response['Location'] = location
-            { message: 'Subscription Created', data: promoter.id }
+            { message: 'Subscription Created', data: promoter.id }.to_json
           rescue Sequel::MassAssignmentRestriction
-            routing.halt 400, { message: 'Illegal Request' }
+            routing.halt 400, { message: 'Illegal Request' }.to_json
           rescue StandardError
-            routing.halt 500, { message: 'Database error' }
+            routing.halt 500, { message: 'Database error' }.to_json
           end
         end
 
@@ -34,7 +34,7 @@ module Rewards
           subscriber = Subscriber.first(id: subscriber_id)
           subscriber ? subscriber.to_json : raise('Could not find subscribers')
         rescue StandardError => e
-          routing.halt(404, { message: e.message })
+          routing.halt 404, { message: e.message }.to_json
         end
       end
 
@@ -42,7 +42,7 @@ module Rewards
       routing.get do
         JSON.pretty_generate({ data: Subscriber.all })
       rescue StandardError
-        routing.halt(404, { message: 'Could not find subscribers' })
+        routing.halt 404, { message: 'Could not find subscribers' }.to_json
       end
 
       # POST api/v1/subscribers
@@ -52,11 +52,11 @@ module Rewards
 
         response.status = 201
         response['Location'] = "#{@subscriber_route}/#{subscriber.id}"
-        { message: 'Subscriber saved', data: subscriber }
+        { message: 'Subscriber saved', data: subscriber }.to_json
       rescue Sequel::MassAssignmentRestriction
-        routing.halt 400, { message: 'Illegal Request' }
+        routing.halt 400, { message: 'Illegal Request' }.to_json
       rescue StandardError => e
-        routing.halt 500, { message: e.message }
+        routing.halt 500, { message: e.message }.to_json
       end
     end
   end

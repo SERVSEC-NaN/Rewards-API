@@ -15,9 +15,9 @@ module Rewards
           promotion = Promotion.first(id: promotion_id)
           promotion ? promotion.to_json : raise('Could not find promotions')
         rescue StandardError => e
-          routing.halt(404, { message: e.message })
+          routing.halt 404, { message: e.message }.to_json
         rescue Sequel::MassAssignmentRestriction
-          routing.halt 400, { message: 'Illegal Request' }
+          routing.halt 400, { message: 'Illegal Request' }.to_json
         end
       end
 
@@ -25,7 +25,7 @@ module Rewards
       routing.get do
         JSON.pretty_generate({ data: Promotion.all })
       rescue StandardError
-        routing.halt(404, { message: 'Could not find promotions' })
+        routing.halt 404, { message: 'Could not find promotions' }.to_json
       end
     end
   end

@@ -20,7 +20,7 @@ module Rewards
             response.status = 201
             location = "#{@tag_route}/#{tag_id}/promotion/#{promotion[:id]}"
             response['Location'] = location
-            { message: 'Promotion tagged', data: promotion[:id] }
+            { message: 'Promotion tagged', data: promotion[:id] }.to_json
           rescue Sequel::MassAssignmentRestriction
             routing.halt 400, { message: 'Illegal Request' }
           rescue StandardError
@@ -33,7 +33,7 @@ module Rewards
           tag = Tag.first(id: tag_id)
           tag ? tag.to_json : raise('Could not find tags')
         rescue StandardError => e
-          routing.halt(404, { message: e.message })
+          routing.halt(404, { message: e.message }.to_json)
         end
       end
 
@@ -41,7 +41,7 @@ module Rewards
       routing.get do
         JSON.pretty_generate({ data: Tag.all })
       rescue StandardError
-        routing.halt(404, { message: 'Could not find tags' })
+        routing.halt(404, { message: 'Could not find tags' }.to_json)
       end
 
       # POST api/v1/tags
@@ -51,11 +51,11 @@ module Rewards
 
         response.status = 201
         response['Location'] = "#{@tag_route}/#{tag.id}"
-        { message: 'Tag saved', data: tag }
+        { message: 'Tag saved', data: tag }.to_json
       rescue Sequel::MassAssignmentRestriction
-        routing.halt 400, { message: 'Illegal Request' }
+        routing.halt 400, { message: 'Illegal Request' }.to_json
       rescue StandardError => e
-        routing.halt 500, { message: e.message }
+        routing.halt 500, { message: e.message }.to_json
       end
     end
   end

@@ -3,6 +3,7 @@
 require 'base64'
 require 'rbnacl'
 
+# Crypto methods for mixin
 module Securable
   class NoDbKeyError < StandardError; end
 
