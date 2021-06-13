@@ -9,8 +9,8 @@ describe 'Test Promoter Handling' do
 
   before do
     wipe_database
-    data = { name: 'P1', organization: '1', email: '1@m.com' }
-    @promoter = Rewards::Promoter.create data
+    @data = { name: 'P1', organization: '1', email: '1@m.com' }
+    @promoter = Rewards::Promoter.create @data
   end
 
   describe 'Getting Promoters' do
@@ -36,8 +36,8 @@ describe 'Test Promoter Handling' do
       assert last_response.ok?
 
       result = JSON.parse last_response.body
-      assert_equal result['attributes']['email'], @promoter.email
-      assert_equal result['attributes']['organization'], @promoter.organization
+      assert_equal result['attributes']['email'], @data[:email]
+      assert_equal result['attributes']['organization'], @data[:organization]
     end
 
     it 'HAPPY: should be able to post promotion for a single promoter' do

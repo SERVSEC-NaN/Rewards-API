@@ -9,19 +9,19 @@ describe 'Test Subscriber Handling' do
 
   before do
     wipe_database
-    phone = '0900000000'
-    @subscriber = Rewards::Subscriber.create(phone: phone)
+    @data = { email: 'me@email.com', password: 'strongpassword' }
+    @subscriber = Rewards::Subscriber.create @data
   end
 
   describe 'Getting subscribers' do
     it 'HAPPY: should create a subscriber' do
-      data = { phone: '0922299' }
+      data = { email: 'e@mail.com', password: 'pass' }
       post api_root, data.to_json
       assert_equal 201, last_response.status
     end
 
     it 'HAPPY: should be able to get list of all subscribers' do
-      Rewards::Subscriber.create(phone: '1234561')
+      Rewards::Subscriber.create(email: 'w@mail.com', password: 'wordpass')
 
       get api_root
       assert last_response.ok?
@@ -36,7 +36,7 @@ describe 'Test Subscriber Handling' do
 
       result = JSON.parse last_response.body
       assert_equal result['attributes']['id'], @subscriber.id
-      assert_equal result['attributes']['phone'], @subscriber.phone
+      assert_equal result['attributes']['email'], @subscriber.email
     end
 
     it 'HAPPY: should be able to make a subscription (subscriber + promoter)' do

@@ -26,7 +26,7 @@ module Rewards
     def to_json(options = {})
       JSON(
         {
-          type: 'promotion',
+          type: 'tag',
           attributes: { id: id, name: name },
           include: { promotions: promotions }
         }, options

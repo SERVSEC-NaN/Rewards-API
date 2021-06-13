@@ -13,7 +13,6 @@ module Rewards
 
     plugin :association_dependencies, promotions: :destroy
     plugin :uuid, field: :id
-    plugin :json_serializer
     plugin :validation_helpers
     plugin :whitelist_security
     plugin :timestamps, update_on_create: true

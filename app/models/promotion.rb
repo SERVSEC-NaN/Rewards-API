@@ -24,23 +24,16 @@ module Rewards
       validates_presence %i[title description]
     end
 
-    # rubocop:disable Metrics/MethodLength
     def to_json(options = {})
-      JSON(
-        {
-          type: 'promotion',
-          attributes: {
-            id: id,
-            title: title,
-            description: description
-          },
-          include: {
-            promoter: promoter_id,
-            tags: tags
-          }
-        }, options
-      )
+      JSON(to_h, options)
     end
-    # rubocop:enable Metrics/MethodLength
+
+    def to_h
+      {
+        type: 'promotion',
+        attributes: { id: id, title: title, description: description },
+        include: { promoter: promoter_id, tags: tags }
+      }
+    end
   end
 end
