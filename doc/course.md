@@ -20,27 +20,27 @@
     - Create full account in database only when App confirms all
       details of account.
 
-- [ ] 2. Web API: Issue and require auth tokens.
+- [x] 2. Web API: Issue and require auth tokens.
 
-    - [ ] Create an AuthToken library:
+    - [x] Create an AuthToken library:
       - Refactor SecureDB to extract a Securable module that handles
         all the crypto logic.
       - Both SecureDB and AuthToken should extend Securable.
 
-    - [ ] Send back an auth token along with account information
+    - [x] Send back an auth token along with account information
           whenever an account is authenticated.
 
-    - [ ] Wehenver a route requires accessing an account's resources,
+    - [x] Whenever a route requires accessing an account's resources,
           check the auth token.
       - Create helper methods that verify account identity of token
         with resource owner.
       - Check token in `HTTP_AUTHENTICATION` header of `HTTP` request
         has `Bearer <TOKEN>`.
 
-    - [ ] Return `403` for any suspicious cases: token is expired,
+    - [x] Return `403` for any suspicious cases: token is expired,
           resource does not belong to account.
 
-- [ ] 3. Web App: Store and use auth tokens.
+- [x] 3. Web App: Store and use auth tokens.
 
     > Please refer to
     > [link](https://github.com/SERVSEC-NaN/Rewards-UI-Ruby#readme) for
