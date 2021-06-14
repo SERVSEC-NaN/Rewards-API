@@ -14,8 +14,8 @@ module Rewards
     end
 
     def self.find(email:)
-      Admin.first(email: email) || Subscriber.first(email: email) ||
-        Promoter.first(email: email)
+      Rewards::Admin.first(email: email) || Rewards::Subscriber.first(email: email) ||
+        Rewards::Promoter.first(email: email)
     end
 
     def name

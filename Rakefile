@@ -96,7 +96,7 @@ namespace :db do
 
   desc 'Seeds admin account into database'
   task seed: %i[load_models] do
-    unless Rewards::Account.first
+    unless Rewards::Admin.first
       require_app 'lib'
       p 'Seeding admin account'
       email = ENV['ADMIN_EMAIL'] || 'admin'
