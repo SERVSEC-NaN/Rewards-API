@@ -5,7 +5,9 @@ require_relative '../config/require_app'
 
 require_app
 
-def app = Rewards::Api
+def app
+  Rewards::Api
+end
 
 unless app.environment == :production
   require 'rack/test'
