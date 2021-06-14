@@ -100,10 +100,9 @@ namespace :db do
       require_app 'lib'
       p 'Seeding admin account'
       email = ENV['ADMIN_EMAIL'] || 'admin'
-      pass  = SecureDB.generate_key
-      Rewards::Admin.create(email: email, password: pass)
-      p name
-      p pass
+      pass  = ENV['ADMIN_PASSWORD'] || SecureDB.generate_key
+      Rewards::Admin.create email: email, password: pass
+      p email, pass
     end
   end
 end
