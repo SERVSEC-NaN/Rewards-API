@@ -96,14 +96,13 @@ namespace :db do
 
   desc 'Seeds admin account into database'
   task seed: %i[load_models] do
-    unless Rewards::Account.first
+    unless Rewards::Admin.first
       require_app 'lib'
       p 'Seeding admin account'
       email = ENV['ADMIN_EMAIL'] || 'admin'
-      pass = SecureDB.generate_key
-      Rewards::Admin.create(email: email, password: pass)
-      p name
-      p pass
+      pass  = ENV['ADMIN_PASSWORD'] || SecureDB.generate_key
+      Rewards::Admin.create email: email, password: pass
+      p email, pass
     end
   end
 end
@@ -113,13 +112,6 @@ namespace :newkey do
   task :db do
     require_app('lib')
     puts "DB_KEY: #{SecureDB.generate_key}"
-  end
-end
-
-namespace :run do
-  # Run in development mode
-  task :dev do
-    sh 'rackup -p 3000'
   end
 end
 
