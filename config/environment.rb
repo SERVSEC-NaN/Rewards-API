@@ -33,6 +33,7 @@ module Rewards
 
     configure do
       SecureDB.setup(ENV.delete('DB_KEY'))
+      AuthToken.setup(ENV.delete('MSG_KEY'))
     end
   end
 end
