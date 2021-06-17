@@ -83,7 +83,9 @@
     Web API:
 
     - [ ] On registration, check if username/email available.
+
     - [ ] Use SendGrid API to send verification email with URL.
+
     - [ ] Create full account in database only when App confirms all
       details of account.
 
