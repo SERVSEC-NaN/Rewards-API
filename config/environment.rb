@@ -23,7 +23,7 @@ module Rewards
 
     def self.logger = Logger.new($stderr)
 
-    DB = Sequel.connect("#{ENV.delete('DATABASE_URL')}?encoding=utf8")
+    DB = Sequel.connect(ENV.delete('DATABASE_URL'))
     def self.DB = DB # rubocop:disable Naming/MethodName
 
     configure :development, :test do
