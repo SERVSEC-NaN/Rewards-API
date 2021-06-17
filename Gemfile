@@ -25,7 +25,6 @@ group :production do
 end
 
 group :development, :test do
-  gem 'pry'
   gem 'rerun'
   gem 'rubocop'
   gem 'rubocop-minitest'
@@ -33,6 +32,10 @@ group :development, :test do
   gem 'rubocop-sequel'
   gem 'sqlite3'
 end
+
+# Debugging
+gem 'pry' # necessary for rake console
+gem 'rack-test'
 
 # Testing
 group :test do
