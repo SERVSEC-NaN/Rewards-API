@@ -44,7 +44,7 @@ task release: %i[spec style audit] do
 end
 
 task :print_env do
-  puts "Environment: #{ENV['RACK_ENV']}"
+  puts "Environment: #{ENV['RACK_ENV'] || 'development'}"
 end
 
 desc 'Run application console (pry)'
