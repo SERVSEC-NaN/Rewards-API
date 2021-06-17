@@ -2,6 +2,73 @@
 
 [Web App](https://github.com/SERVSEC-NaN/Rewards-UI-Ruby#readme)
 
+# Week 16: Authorization Protocols
+
+1. AuthScopes: Use scoped authorization
+
+ - Web API:
+
+    - [ ] Create scoped authorization tokens
+
+    - [ ] Create AuthScope library to process auth scopes
+
+    - [ ] AuthToken should add scope to all tokens (default can be full access
+      scope for user sessions)
+
+    - [ ] Create route /account/[username] for account details with limited
+      scope `auth_token`
+
+    - [ ] Service Objects should extract `auth_scope` from `auth_token` and
+      pass it to policy object
+
+    - [ ] Policy Objects should interpret their policy rules within the given
+      `auth_scope`
+
+ - Web App:
+
+ You might have to clear any existing session data that used old `auth_tokens`
+ without scope Account information view should include a limited scope
+ `auth_token` (e.g., read only for some resources)
+
+# Week 15: Policies and Validation
+
+3. Formal Policies
+
+- Web API: Create policy objects in an app/policies folder
+
+  - [ ] Create at least one policy object per resource (e.g., ProjectPolicy,
+    DocumentPolicy, etc.)
+
+  - [ ] Initialize policy objects with appropriate models (subject and object
+    of policy)
+
+  - [ ] Create true/false predicate methods check for key actions
+    (creation/deletion/updating/viewing, etc.)
+
+  - [ ] Make your predicate methods readable by using descriptive private
+    predicates
+
+  - [ ] Use your policy objects in resource request routes to check
+    authorization of account and resource
+
+- Web API: Create policy scope objects
+
+  - [ ] Scope objects should return lists of all relevant objects for a given
+    action (e.g., viewable) and agents (e.g., current_account)
+
+  - [ ] Use your policy scopes to retrieve lists of objects to return on index
+    routes (e.g., /api/v1/projects)
+
+- Policy summaries
+
+- [ ] Web API: Create a summary method for each policy object that returns a
+  hash of all predicate names and results
+
+- [ ] Web API: Routes that return a resource should return a jsonified summary
+  of its policy for the given account
+
+- Web App: Forms should determine authorization to show links/buttons/resources based on policy summaries returned by API
+
 # Week 14: Token-based Registration and Authorization
 
 - [ ] 1. Create a registration workflow that verifies user
@@ -15,9 +82,11 @@
 
     Web API:
 
-    - On registration, check if username/email available.
-    - Use SendGrid API to send verification email with URL.
-    - Create full account in database only when App confirms all
+    - [ ] On registration, check if username/email available.
+
+    - [ ] Use SendGrid API to send verification email with URL.
+
+    - [ ] Create full account in database only when App confirms all
       details of account.
 
 - [x] 2. Web API: Issue and require auth tokens.
