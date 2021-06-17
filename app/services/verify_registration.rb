@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'base64'
+require 'http'
 require_relative '../models/account'
 
 # Handles email registration
-class VerifyRegistation
+class VerifyRegistration
   class InvalidRegistration < StandardError; end
 
   def initialize(registration)
@@ -20,7 +20,7 @@ class VerifyRegistation
   private
 
   def email_available?
-    !Rewards::Account.find(email: @registration[:email]).nil?
+    Rewards::Account.find(email: @registration[:email]).nil?
   end
 
   def send_email_verification
@@ -50,7 +50,7 @@ class VerifyRegistation
   end
 
   def from_email
-    ENV['SENDGRID_FROM_EMAIL'] || 'Rewards <noreply@rewards.app>'
+    ENV['SENDGRID_FROM_EMAIL']
   end
 
   def mail_api_key

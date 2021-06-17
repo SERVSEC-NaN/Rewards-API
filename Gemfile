@@ -20,6 +20,9 @@ gem 'require_all'
 gem 'hirb', '~>0'
 gem 'sequel', '~>5'
 
+# External Services
+gem 'http'
+
 group :production do
   gem 'pg'
 end

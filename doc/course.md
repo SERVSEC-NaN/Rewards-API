@@ -71,7 +71,7 @@
 
 # Week 14: Token-based Registration and Authorization
 
-- [ ] 1. Create a registration workflow that verifies user
+- [x] 1. Create a registration workflow that verifies user
       registration using token.
 
     Web App:
@@ -82,11 +82,11 @@
 
     Web API:
 
-    - [ ] On registration, check if username/email available.
+    - [x] On registration, check if username/email available.
 
-    - [ ] Use SendGrid API to send verification email with URL.
+    - [x] Use SendGrid API to send verification email with URL.
 
-    - [ ] Create full account in database only when App confirms all
+    - [x] Create full account in database only when App confirms all
       details of account.
 
 - [x] 2. Web API: Issue and require auth tokens.
