@@ -1,4 +1,5 @@
 _*
+.env
 .bundle
 .irb_history
 app/db/store/*.db

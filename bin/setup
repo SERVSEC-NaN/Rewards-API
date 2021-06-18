@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-
-bundle install
-mkdir -p ./app/db/store ||:
-bundle exec rake db:migrate
-RACK_ENV=test bundle exec rake db:migrate

@@ -17,28 +17,19 @@ with them.
 
 <h3 align="center">Setup</h3>
 
-Just run
-
 ```sh
-bin/setup
+make setup
 ```
 
-Which translates to:
-
-Install/Update the gems.
+Run tests
 
 ```sh
-bundle install
+make test
 ```
 
-Migrates the test database.
+Run server
 
 ```sh
-RACK_ENV=test bundle exec rake db:migrate
+make up
 ```
 
-Migrates the development database.
-
-```sh
-bundle exec rake db:migrate
-```
