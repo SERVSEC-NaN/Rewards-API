@@ -13,7 +13,7 @@ module Rewards
       end
 
       def message
-        "Invalid Credentials for: #{@credentials[:username]}"
+        "Invalid Credentials for: #{@credentials[:email]}"
       end
     end
 
