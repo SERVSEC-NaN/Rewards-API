@@ -32,7 +32,7 @@ module Rewards
       {
         type: 'promotion',
         attributes: { id: id, title: title, description: description },
-        include: { promoter: promoter_id, tags: tags }
+        include: { promoter_id: promoter_id, tags: tags }
       }
     end
   end

@@ -36,16 +36,16 @@
 
 - Web API: Create policy objects in an app/policies folder
 
-  - [ ] Create at least one policy object per resource (e.g., ProjectPolicy,
+  - [x] Create at least one policy object per resource (e.g., ProjectPolicy,
     DocumentPolicy, etc.)
 
-  - [ ] Initialize policy objects with appropriate models (subject and object
+  - [x] Initialize policy objects with appropriate models (subject and object
     of policy)
 
-  - [ ] Create true/false predicate methods check for key actions
+  - [x] Create true/false predicate methods check for key actions
     (creation/deletion/updating/viewing, etc.)
 
-  - [ ] Make your predicate methods readable by using descriptive private
+  - [x] Make your predicate methods readable by using descriptive private
     predicates
 
   - [ ] Use your policy objects in resource request routes to check
@@ -67,7 +67,8 @@
 - [ ] Web API: Routes that return a resource should return a jsonified summary
   of its policy for the given account
 
-- Web App: Forms should determine authorization to show links/buttons/resources based on policy summaries returned by API
+- Web App: Forms should determine authorization to show links/buttons/resources
+  based on policy summaries returned by API
 
 # Week 14: Token-based Registration and Authorization
 
