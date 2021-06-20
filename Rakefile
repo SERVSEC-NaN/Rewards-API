@@ -76,7 +76,7 @@ namespace :db do
 
   desc 'Delete database'
   task :delete do
-    TABLES.each do |table|
+    (@app.DB.tables.reverse - [:schema_info]).each do |table|
       @app.DB[table].delete
     end
   end

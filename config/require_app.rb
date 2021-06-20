@@ -8,16 +8,6 @@
 #  require_app('config')
 #  require_app(['config', 'models'])
 
-TABLES = %i[
-  promotion_tags
-  subscriptions
-  promotions
-  subscribers
-  promoters
-  tags
-  admins
-].freeze
-
 def require_app(folders = %w[lib helpers models services controllers])
   app_list  = Array(folders).map { |folder| "app/#{folder}" }
   full_list = ['config', app_list].flatten.join(',')
