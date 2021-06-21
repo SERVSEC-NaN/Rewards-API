@@ -55,7 +55,7 @@ describe 'Test Subscriber Handling' do
 
     it 'SECURITY: should not use deterministic integers as ID' do
       id = @subscriber.id
-      assert_equal id.is_a?(Numeric), false
+      refute id.is_a?(Numeric)
     end
 
     it 'SECURITY: should prevent basic SQL injection targeting IDs' do
