@@ -9,7 +9,7 @@ class PromotionPolicy
   end
 
   def can_view?
-    can_read? && (account_owns_promotion? || account_subscribed_to_promoter?)
+    can_read? || account_owns_promotion? || account_subscribed_to_promoter?
   end
 
   def can_edit?
@@ -45,7 +45,7 @@ class PromotionPolicy
   def account_subscribed_to_promoter?
     Rewards::Promoter
       .find(id: @promotion.promoter_id)
-      .subscribers.find(id: @acount.id).first
+      .subscribers.find(id: @account.id).first
       .exists?
   end
 end

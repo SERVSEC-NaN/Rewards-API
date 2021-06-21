@@ -23,14 +23,16 @@ module Rewards
       validates_unique   :name
     end
 
+    def to_h
+      {
+        type: 'tag',
+        attributes: { id: id, name: name },
+        include: { promotions: promotions }
+      }
+    end
+
     def to_json(options = {})
-      JSON(
-        {
-          type: 'tag',
-          attributes: { id: id, name: name },
-          include: { promotions: promotions }
-        }, options
-      )
+      JSON(to_h, options)
     end
   end
 end

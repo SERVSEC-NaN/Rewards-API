@@ -35,5 +35,7 @@ module Rewards
         include: { promoter_id: promoter_id, tags: tags }
       }
     end
+
+    alias full_details to_h
   end
 end
