@@ -42,6 +42,7 @@ gem 'pry' # necessary for rake console
 # Testing
 group :test do
   gem 'minitest'
+  gem 'minitest-documentation'
   gem 'minitest-rg'
   gem 'rack-test'
 end

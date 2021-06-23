@@ -2,6 +2,7 @@
 
 ENV['RACK_ENV'] = 'test'
 
+require 'minitest/documentation'
 require 'minitest/autorun'
 require 'minitest/rg'
 

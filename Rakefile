@@ -10,7 +10,8 @@ task default: :spec
 desc 'Test all the specs'
 task :spec do
   Rake::TestTask.new(:spec) do |t|
-    t.pattern = 'spec/**/*_spec.rb'
+    t.libs << 'test'
+    t.test_files = FileList['spec/**/*_spec.rb']
     t.warning = false
   end
 end
