@@ -23,7 +23,7 @@ bundle install
 Setup development database once:
 
 ```shell
-bundle exec rake db:migrate
+make setup
 ```
 
 ## Execute
@@ -31,21 +31,15 @@ bundle exec rake db:migrate
 Run this API using:
 
 ```shell
-bundle exec rackup
+make up
 ```
 
 ## Test
 
-Setup test database once:
-
-```shell
-RACK_ENV=test bundle exec rake db:migrate
-```
-
 Run the test specification script in `Rakefile`:
 
 ```shell
-bundle exec rake spec
+make test
 ```
 
 Routes
@@ -112,6 +106,10 @@ POST api/v1/subscribers/{subscriber_id}/subscribe
 
 Get details of a single subscriber
 
+| Parameter               | Type     | Description   |
+| :---------------------- | :------- | :------------ |
+| `Authorization: Bearer` | `string` | **Required**. |
+
 ```http
 GET api/v1/subscribers/{subscriber_id}
 ```
@@ -154,6 +152,12 @@ GET api/v1/promoters/{promoter_id}/promotions/{promotion_id}
 ```
 
 Get all promotions of a specific promoter
+
+Necessary headers:
+
+| Parameter               | Type     | Description   |
+| :---------------------- | :------- | :------------ |
+| `Authorization: Bearer` | `string` | **Required**. |
 
 ```http
 GET api/v1/promoters/{promoter_id}/promotions/
