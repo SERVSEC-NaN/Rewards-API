@@ -2,6 +2,21 @@
 
 [Web App](https://github.com/SERVSEC-NaN/Rewards-UI-Ruby#readme)
 
+# Week 17: Client-Side Security
+
+1. Web API + Web App: Signed Client Requests
+
+- API: Require signed routes
+
+  - [ ] At a minimum, all POST requests to API that cannot provide an
+    `auth_token` must be signed.
+
+  - [ ] Create a `SignedRequest` library to verify signed requests using a
+    verify key.
+
+  - [ ] Relevant route blocks should verify signed requests before handling
+    parsed data.
+
 # Week 16: Authorization Protocols
 
 1. AuthScopes: Use scoped authorization
