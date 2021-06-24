@@ -11,6 +11,7 @@ clean:
 .PHONY: setup
 setup: clean ## Download gems, reset and re-migrate the database.
 	@mkdir -p ./app/db/store
+	@bundle config set --local without 'production'
 	@bundle install
 	@bundle exec rake db:migrate
 
