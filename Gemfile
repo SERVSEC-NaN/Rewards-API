@@ -45,6 +45,7 @@ group :test do
   gem 'minitest-documentation'
   gem 'minitest-rg'
   gem 'rack-test'
+  gem 'simplecov', require: false
 end
 
 # Security
