@@ -3,3 +3,5 @@ _*
 .bundle
 .irb_history
 app/db/store/*.db
+!coverage/.last_run.json
+coverage/
